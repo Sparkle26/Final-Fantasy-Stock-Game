@@ -1,6 +1,8 @@
 #REQUIREMENTS (AHHHHHHHH)
 
 --1.0 Ensure DB is updated as required
+1.1 Ensure all SQL pulls/request work
+1.2
 
 --2.0 API
 2.1 Choose API Design
