@@ -1,0 +1,45 @@
+#REQUIREMENTS (AHHHHHHHH)
+
+--1.0 Ensure DB is updated as required
+
+--2.0 API
+2.1 Choose API Design
+2.2 Research and Documet Functionality
+2.3 Use CRUD Methods and set up those files
+2.4 Implement API for different requests
+
+--3.0 Create a universal style sheet
+3.1 Style for each page
+3.2 Style for each table of stocks and league
+3.3 Ensure players can user their own profile pictures (Maybe)
+
+--4.0 Create login
+4.1 username and real name, email
+4.2 Password Security
+
+--5.0 Create user page
+5.1 Display user info and league
+5.2 Display holdings
+
+--6.0 Create League Page
+6.1 Create page based on individual leagues
+6.2 Show users in league
+6.3 Rank them based on W/L
+
+--7.0 Connect a stock source
+7.1 This might be done via Req 8
+
+--8.0 Create Scraper and Cron
+8.1 Research Yahoo_fin Python package
+8.2 Create Scraper
+8.3 Research and create Cron task
+8.4 Implement both to work with our DB
+
+--9.0 Create Matchup Page
+9.1 Design match making system
+9.2 Pull from Cron/Scraper and solve for % change
+9.3 Sum all % change for users and designate winner and loser (Also update w/in DB)
+
+--10.0 Documentation
+10.1 Document API
+10.2 Document Scraper, Cron, and Yahoo_fin package
