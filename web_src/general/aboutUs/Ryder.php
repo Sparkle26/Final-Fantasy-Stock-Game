@@ -4,9 +4,7 @@
 
 <head> 
     <title> Ryder Paulus's About
-        <?PHP
-            require_once "../../classes/Page.php";
-        ?>
+
 </head>
 <body>
     <main>
