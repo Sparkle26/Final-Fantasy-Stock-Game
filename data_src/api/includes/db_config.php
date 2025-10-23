@@ -9,7 +9,7 @@ if($_SERVER["HTTP_HOST"]=="127.0.0.1" || $_SERVER["HTTP_HOST"]=="localhost"){
     $dbUsername = "u413142534_fantasy";
     $dbPassword = "StocksR0ck!";
 }else{
-    $host = "srv557.hstgr.io";
+    $host = "ftp://etowndb.com";
     $database = "u413142534.fantasy";
     $dbUsername = "u413142534.fantasy";
     $dbPassword = "LetsPL@y4Fun!!";
