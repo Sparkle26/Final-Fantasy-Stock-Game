@@ -30,10 +30,10 @@ CREATE TABLE IF NOT EXISTS holdings (
     start_price DECIMAL(10),
     end_price DECIMAL(10),
     indicies VARCHAR(45),
-    index INT,
+    indexs INT,
 
     PRIMARY KEY (ticket),
-    CONSTRAINT fk_holdings_to_sector FOREIGN KEY (index) REFERENCES sector(index)
+    CONSTRAINT fk_holdings_to_sector FOREIGN KEY (indexs) REFERENCES sector(indexs)
 );
 
 CREATE TABLE IF NOT EXISTS matchups (
@@ -51,8 +51,8 @@ CREATE TABLE IF NOT EXISTS matchups (
 );
 
 CREATE TABLE IF NOT EXISTS sector (
-    index INT AUTO_INCREMENT,
+    indexs INT AUTO_INCREMENT,
     sector_name VARCHAR(45),
 
-    PRIMARY KEY (index)
+    PRIMARY KEY (indexs)
 );
