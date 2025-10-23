@@ -1,7 +1,4 @@
-<?PHP
-session_start();
-?>
-
+<html>
 <head> 
     <title> Ryder Paulus's About
 
@@ -21,3 +18,4 @@ session_start();
 
     </main>
 </body>
+</html>
