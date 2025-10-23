@@ -1,9 +1,11 @@
 <html>
 <head> 
-    <title> Ryder Paulus's About
+    <title> Ryder Paulus's About </title>
 </head>
-<body>
+<BODY>
+    <div>
        <h1> About Ryder </h1> 
+</div>
         <div>
                 I am a Junior International Business major with a double major in Information Systems and concentrations in data analytics and management. 
                 I am the president of the Lifting Club and the coach of the Men's Club Soccer Team. 
@@ -14,5 +16,5 @@
 <a href="../../index.html"><button class="button button2">Go Back!</button></a>
 
 
-</body>
+</BODY>
 </html>
