@@ -1,9 +1,43 @@
+@import url('https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@300;400;500;600;700;800&display=swap');
+
 body {
-    background-color:rgb(20, 124, 159);
+    background-color:rgb(255, 255, 255);
     color:#FFFFFF;
 }
+
+/* Title */
+h1 {
+  font-family: 'Plus Jakarta Sans', system-ui, -apple-system, 'Segoe UI', Roboto, 'Helvetica Neue', Arial, sans-serif;
+}
+
+
+/* Header*/
+
+ul {
+  list-style-type: none;
+  margin: 0;
+  padding: 0;
+  background-color: #ffffff;
+  display: flex;
+}
+
+ul li { 
+float: right;
+}
+
+ul li a {
+  display: block;
+  color: rgb(0, 0, 0);
+  padding: 14px 16px;
+  text-decoration: none;
+  font-family: 'Plus Jakarta Sans', system-ui, -apple-system, 'Segoe UI', Roboto, 'Helvetica Neue', Arial, sans-serif;
+
+}
+
+ul li a:hover {
+ color: #3DB5E6;
+}
+
 div {
-
-    color:#FFFFFF;
-
+    color:#000000;
 }
