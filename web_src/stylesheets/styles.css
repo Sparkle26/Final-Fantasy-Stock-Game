@@ -11,18 +11,22 @@ h1 {
 }
 
 
-/* Header*/
-
+/* Header / Navigation */
 ul {
-  list-style-type: none;
+  list-style: none;
   margin: 0;
-  padding: 0;
+  padding: 8px 12px;
   background-color: #ffffff;
   display: flex;
+  justify-content: flex-end; 
+  align-items: center;
+  gap: 8px; 
 }
 
-ul li { 
-float: right;
+/* remove float; flex handles layout */
+ul li {
+  margin: 0;
+  padding: 0;
 }
 
 ul li a {
