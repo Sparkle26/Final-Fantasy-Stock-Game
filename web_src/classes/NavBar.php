@@ -3,7 +3,7 @@
     class NavBar {
         private $links = [];
         private static $defaultNavLinks = [
-            "Home" => ["url" => "/web_src/index.php", "icon" => "fas fa-home"],
+            "Home" => ["url" => "/web_src/index.html", "icon" => "fas fa-home"],
             //"About" => ["url" => "/web_src/general/about.php", "icon" => "fas fa-info-circle"],
             //"Games" => ["url" => "/web_src/games.php", "icon" => "fas fa-gamepad"],
             //"Leaderboard" => ["url" => "/web_src/leaderboard.php", "icon" => "fas fa-trophy"],
