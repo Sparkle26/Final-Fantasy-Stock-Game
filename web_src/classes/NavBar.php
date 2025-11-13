@@ -4,7 +4,7 @@
         private $links = [];
         private static $defaultNavLinks = [
         "Home" => ["url" => "/web_src/index.html", "icon" => "fas fa-home"],
-        "About" => ["url" => "/web_src/general/aboutUs/about.php", "icon" => "fas fa-info-circle"],
+        "About" => ["url" => "/web_src/about.php", "icon" => "fas fa-info-circle"],
             //"Games" => ["url" => "/web_src/games.php", "icon" => "fas fa-gamepad"],
             //"Leaderboard" => ["url" => "/web_src/leaderboard.php", "icon" => "fas fa-trophy"],
             //"Login" => ["url" => "/web_src/index.php?page=login", "icon" => "fas fa-key"]
