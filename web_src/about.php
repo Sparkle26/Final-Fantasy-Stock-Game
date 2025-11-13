@@ -22,6 +22,7 @@ require_once "../data_src/api/includes/db_connect.php";
 
 <!DOCTYPE html>
 <html lang="en">
+<link rel="stylesheet" href="stylesheets/styles.css">
 <head>
     <meta charset="UTF-8">
     <title>About Our Team | Fantasy Stock Game</title>
