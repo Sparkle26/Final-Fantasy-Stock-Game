@@ -1,7 +1,7 @@
 <?php
 // File for connecting to the database
 
-require_once __DIR__ . '/db_config.php';
+require_once 'db_config.php';
 
 // Create database connection
 $connection = new mysqli($host, $dbUsername, $dbPassword, $database);

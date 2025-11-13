@@ -2,12 +2,13 @@
 // Optional if you'll add session-based navigation later
 // session_start();
 session_start();
-require_once "db_connect.php";
+require_once "../data_src/api/includes/db_connect.php";
+
 
 // Redirect if not logged in
 if (!isset($_SESSION['user_id'])) {
-    header("Location: login.php");
-    exit();
+   header("Location: login.php");
+   exit();
 }
 
 // Fetch user info
@@ -15,6 +16,8 @@ $user_id = $_SESSION['user_id'];
 $stmt = $pdo->prepare("SELECT username, wins, losses FROM user WHERE userID = ?");
 $stmt->execute([$user_id]);
 $user = $stmt->fetch(PDO::FETCH_ASSOC);
+
+
 ?>
 
 <!DOCTYPE html>
@@ -22,7 +25,7 @@ $user = $stmt->fetch(PDO::FETCH_ASSOC);
 <head>
     <meta charset="UTF-8">
     <title>About Our Team | Fantasy Stock Game</title>
-    <link rel="stylesheet" href="styles.css">
+    <link rel="stylesheet" href="about.css">
 </head>
 <body>
     <header>
