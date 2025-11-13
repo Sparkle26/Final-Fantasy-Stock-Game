@@ -4,7 +4,7 @@ require_once "db_connect.php";
 
 // Redirect if not logged in
 if (!isset($_SESSION['user_id'])) {
-    header("Location: login.php");
+    header("Location: /web_src/classes/Login/Login.php");
     exit();
 }
 

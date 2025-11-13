@@ -1,8 +1,4 @@
-<?php
-
-class RegistrationForm{
-
-    static function render(){
+<html>
             return '<div class="add">
             <div id="welcome-text">Register</div>
             <div id="basicContainer">
@@ -26,12 +22,6 @@ class RegistrationForm{
             </form>
             </div>
         </div>
-    ';
-    }
 
-}
+</html>
 
-
-
-
-?>
