@@ -1,6 +1,20 @@
 <?php
 // Optional if you'll add session-based navigation later
 // session_start();
+session_start();
+require_once "db_connect.php";
+
+// Redirect if not logged in
+if (!isset($_SESSION['user_id'])) {
+    header("Location: login.php");
+    exit();
+}
+
+// Fetch user info
+$user_id = $_SESSION['user_id'];
+$stmt = $pdo->prepare("SELECT username, wins, losses FROM user WHERE userID = ?");
+$stmt->execute([$user_id]);
+$user = $stmt->fetch(PDO::FETCH_ASSOC);
 ?>
 
 <!DOCTYPE html>
