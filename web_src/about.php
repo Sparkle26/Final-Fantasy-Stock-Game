@@ -7,7 +7,7 @@ require_once "../data_src/api/includes/db_connect.php";
 
 // Redirect if not logged in
 if (!isset($_SESSION['user_id'])) {
-   header("Location: login.php");
+   header("Location: /web_src/classes/Login/login.php");
    exit();
 }
 
