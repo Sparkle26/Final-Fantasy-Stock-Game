@@ -79,19 +79,46 @@ p {
   color: #2b2b2b;
 }
 
-form  {
-  input {
+form input{
     font-family: 'Plus Jakarta Sans', system-ui, -apple-system, 'Segoe UI', Roboto, 'Helvetica Neue', Arial, sans-serif;
     margin: 10px;
     margin-left: 40px;
     padding: 8px;
     border: 1px solid #ccc;
     border-radius: 4px;
-  }
 }
 
-image {
-width: 1001px;
-height: 757px;
-border-radius: 63px 0 0 0;
+.homeScreenImage {
+  width: 500px;
+  height: auto;
+  border-radius: 63px 0 0 0;
+  position: absolute;
+  top: 120px;
+  right: 50px;
+}
+
+.submit-button {
+  margin-left: 40px;
+  padding: 8px 14px;
+  border-radius: 4px;
+  border: none;
+  background: #5E845B;
+  color: #ffffff;
+  font-size: 14px;
+  cursor: pointer;
+  transition: background 0.3s ease;
+}
+
+.submit-button:hover {
+  background: #497447;
+}
+
+.bottom-bar {
+  position: fixed;
+  bottom: 0;
+  left: 0;
+  width: 100%;
+  height: 67px;
+  background-color: #5E845B;
+  z-index: 10;
 }
