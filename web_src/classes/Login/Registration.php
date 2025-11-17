@@ -1,27 +1,46 @@
+<?php
+ini_set('display_errors', 1);
+ini_set('display_startup_errors', 1);
+error_reporting(E_ALL);
+session_start();
+?>
+
+<!DOCTYPE html>
 <html>
-            return '<div class="add">
-            <div id="welcome-text">Register</div>
-            <div id="basicContainer">
-                
-            <!-- Registration Form -->
-            <form action="../data_src/api/user/create.php" method="post" style= "text-align: left">
-                <label for="firstname"><b>First Name: </b></label>
-                <input type="text" placeholder="Enter First Name" name="first" id="first" required>
+<head>
+    <title>Register</title>
+    <link rel="stylesheet" href="../../stylesheets/styles.css">
+</head>
 
-                <label for="email"><b>Email: </b></label>
-                <input type="text" placeholder="Enter Email" name="email" id="email" required>
+<body>
+    <section id="register">
+        <div id="welcome-text">Register</div>
+        <div id="basicContainer">
+            <?php
+if (isset($_GET['error'])) {
+    $msg = '';
+    switch ($_GET['error']) {
+        case 'missing': $msg = "Please fill in all fields."; break;
+        case 'nomatch': $msg = "Passwords do not match."; break;
+        case 'taken': $msg = "Username already taken."; break;
+    }
+    if ($msg) echo "<p style='color:red;'>$msg</p>";
+}
 
-                <label for="username"><b>Username: </b></label>
-                <input type="text" placeholder="Enter Username" name="user" id="user" required>
+if (isset($_GET['success']) && $_GET['success'] === 'registered') {
+    echo "<p style='color:green;'>Registration successful! You can log in now.</p>";
+}
+?>
 
-
-                <label for="password"><b>Password: </b></label>
-                <input type="password" placeholder="Enter Password" name="password" id="password" required>
-
-                <input type ="submit" value="Register">
+            <form action="../../../data_src/api/Login/registration_jawn.php" method="post">
+                <input type="text" name="username" placeholder="Username" required><br>
+                <input type="password" name="password" placeholder="Password" required><br>
+                <input type="password" name="confirm_password" placeholder="Confirm Password" required><br>
+                <input type="submit" value="Register" class="submit-button">
             </form>
-            </div>
+
+            <a class="nav-link" href="Login.php">Back to Login</a>
         </div>
-
+    </section>
+</body>
 </html>
-

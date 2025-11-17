@@ -3,7 +3,7 @@ ini_set('display_errors', 1);
 ini_set('display_startup_errors', 1);
 error_reporting(E_ALL);
 session_start();
-require_once __DIR__ . '/../includes/db_connect.php';
+require_once __DIR__ . '/../data_src/api/includes/db_connect.php';
 
 //Redirect if not logged in
 if (!isset($_SESSION['user_id'])) {
@@ -12,10 +12,12 @@ if (!isset($_SESSION['user_id'])) {
 }
 
 // Fetch user info
-$user_id = $_SESSION['user_id'];
-$stmt = $pdo->prepare("SELECT username, wins, losses FROM user WHERE userID = ?");
-$stmt->execute([$user_id]);
-$user = $stmt->fetch(PDO::FETCH_ASSOC);
+$stmt = $connection->prepare("SELECT username, wins, losses FROM user WHERE userID = ?");
+$stmt->bind_param("i", $user_id);
+$stmt->execute();
+$result = $stmt->get_result();
+$user = $result->fetch_assoc();
+
 ?>
 
 <!DOCTYPE html>
