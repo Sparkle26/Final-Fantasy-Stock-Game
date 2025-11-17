@@ -3,6 +3,7 @@
 
 .content {
     h2 {
+    margin-left: 29px;
     display: flex;
     margin-top: -50px ;
     width: 437px;
@@ -11,7 +12,10 @@
     color: #1E1E1E;
 }
 }
-.about-section p {
+
+.content {
+    p {
+    margin-left: 29px;
     display: flex;
     width: 496px;
     flex-direction: column;
@@ -23,6 +27,7 @@
     font-weight: 500;
     line-height: 121.2%; /* 24.24px */
     margin-bottom: 50px; /* adjust spacing as needed */
+}
 }
 
 
