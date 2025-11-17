@@ -3,10 +3,10 @@ session_start();
 require_once "../data_src/api/includes/db_connect.php";
 
 // Redirect if not logged in
-if (!isset($_SESSION['user_id'])) {
-    header("Location: classes/Login/Login.php");
-    exit();
-}
+// if (!isset($_SESSION['user_id'])) {
+//     header("Location: classes/Login/Login.php");
+//     exit();
+// }
 
 // Fetch league info
 $stmt = $pdo->prepare("
@@ -29,6 +29,26 @@ $users = $stmt->fetchAll(PDO::FETCH_ASSOC);
 <body>
     <?php if (!empty($users)): ?>
         <h2>Welcome to <?php echo htmlspecialchars($users[0]['league_name']); ?>!</h2>
+        <table>
+            <tr>
+                <th style="text-align:center">Username</th>
+                <th style="text-align:center">Wins</th>
+                <th style="text-align:center">Losses</th>
+            </tr>
+            <?php foreach ($users as $user): ?>
+                <tr>
+                    <td style="text-align:center">
+                        <?php echo htmlspecialchars($user['username']); ?>
+                    </td>
+                    <td style="text-align:center">
+                        <?php echo htmlspecialchars($user['wins']); ?>
+                    </td>
+                    <td style="text-align:center">
+                        <?php echo htmlspecialchars($user['losses']); ?>
+                    </td>
+                </tr>
+            <?php endforeach; ?>
+        </table>
     <?php else: ?>
         <h2>No users found in the league.</h2>
     <?php endif; ?>
