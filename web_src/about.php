@@ -1,14 +1,6 @@
 <?php
 session_start();
 require_once "../data_src/api/includes/db_connect.php";
-
-// Optional session-based redirects
-/*
-if (!isset($_SESSION['user_id'])) {
-    header("Location: /web_src/classes/Login/Login.php");
-    exit();
-}
-*/
 ?>
 
 <!DOCTYPE html>
@@ -19,28 +11,15 @@ if (!isset($_SESSION['user_id'])) {
 
     <link rel="stylesheet" href="stylesheets/about.css">
     <link rel="stylesheet" href="stylesheets/styles.css">
-
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
 </head>
 <body>
 
-<!-- Integrated Header + Navbar -->
 <header class="site-header">
     <div class="site-title-container">
         <h1 class="site-title">Fantasy Stocks</h1>
     </div>
 
-<<<<<<< HEAD
-        <section class="team-links">
-            <h2>Meet the Team</h2>
-            <ul>
-                <li><a href="general/aboutUs/Aya.php">Aya</a></li>
-                <li><a href="general/aboutUs/Paul.php">Paul</a></li>
-                <li><a href="general/aboutUS/Ryder.php">Ryder</a></li>
-            </ul>
-        </section>
-    </main>
-=======
     <nav class="site-nav">
         <ul class="site-nav-list">
             <li><a href="index.html">Home</a></li>
@@ -50,20 +29,57 @@ if (!isset($_SESSION['user_id'])) {
     </nav>
 </header>
 
-<main class="content">
+<main class="about-main">
+
     <section class="about-section">
         <h2>WHO WE ARE</h2>
+
         <p>
             Welcome to the Fantasy Stock Game — a project built by a group of students 
             passionate about combining finance, competition, and web development. 
-            Our goal is to bring the excitement of fantasy sports into the world of investing.
+            Our goal is to bring the excitement <br> of fantasy sports into the world of investing.
         </p>
+
         <p>
-            Each member of our team contributed unique skills — from backend development and data scraping 
-            to frontend design and user experience. This project represents our shared interest in 
-            technology and markets.
+            Each member of our team contributed <br> unique skills — from backend development <br> and data scraping 
+            to frontend design and user <br> experience. This project represents our shared interest
+            in technology and markets.
         </p>
     </section>
+
+    <section class="card-section">
+        <div class="card-container">
+
+            <div class="card" 
+                style="--image: url('ftp://etowndb.com/web_src/Images/01aa16e441c66aafc86798964bf6649a.jpg'); 
+                       --angle: -5deg; --x: 5%; --y: 15%; 
+                       --caption: 'Photo of us working'"></div>
+
+            <div class="card" 
+                style="--image: url('ftp://etowndb.com/web_src/Images/170803.jpg'); 
+                       --angle: -1deg; --x: -10%; --y: -20%; 
+                       --caption: 'Photo of some computer screens'"></div>
+
+            <div class="card" 
+                style="--image: url('ftp://etowndb.com/web_src/Images/Barbie%20dreamhouse%E2%9C%AD.jpg'); 
+                       --angle: -4deg; --x: -20%; --y: 5%; 
+                       --caption: 'Our poster'"></div>
+
+            <div class="card" 
+                style="--image: url('ftp://etowndb.com/web_src/Images/_%20%281%29.jpeg'); 
+                       --angle: 7deg; --x: 10%; --y: -7%; 
+                       --caption: 'Us mock presenting maybe'"></div>
+
+        </div>
+    </section>
+
+
+<br> 
+
+</main>
+<main class="about-team">
+
+<div style="border-bottom: 3px solid #000; margin: 20px 0; height: 1px;"></div>
 
     <section class="team-links">
         <h2>Meet the Team</h2>
@@ -73,12 +89,12 @@ if (!isset($_SESSION['user_id'])) {
             <li><a href="Ryder.php">Ryder</a></li>
         </ul>
     </section>
+
 </main>
 
 <footer>
-    <p>&copy; <?php echo date("Y"); ?> Fantasy Stock Game Team. All rights reserved.</p>
+    <p>&copy; <?= date("Y"); ?> Fantasy Stock Game Team. All rights reserved.</p>
 </footer>
->>>>>>> 0d51d04 (fixing photo on home screen and progess on about page)
 
 </body>
 </html>
