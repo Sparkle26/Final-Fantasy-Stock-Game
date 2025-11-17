@@ -4,6 +4,7 @@ ini_set('display_startup_errors', 1);
 error_reporting(E_ALL);
 session_start();
 require_once __DIR__ . '/../data_src/api/includes/db_connect.php';
+require_once 'classes/NavBar.php';
 
 //Redirect if not logged in
 if (!isset($_SESSION['user_id'])) {
@@ -33,6 +34,6 @@ $user = $result->fetch_assoc();
     <p><strong>Wins:</strong> <?php echo $user['wins']; ?></p>
     <p><strong>Losses:</strong> <?php echo $user['losses']; ?></p>
 
-    <a href="logout.php">Logout</a>
+    <a href="/web_src/classes/Login/Logout.php">Logout</a>
 </body>
 </html>
