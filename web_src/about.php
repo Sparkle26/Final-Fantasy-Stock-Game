@@ -71,16 +71,13 @@ require_once "../data_src/api/includes/db_connect.php";
                        --caption: 'Us mock presenting maybe'"></div>
 
         </div>
+        <div style="border-bottom: 3px solid #000; margin: 20px 0; height: 1px;"></div>
     </section>
-
 
 <br> 
 
 </main>
 <main class="about-team">
-
-<div style="border-bottom: 3px solid #000; margin: 20px 0; height: 1px;"></div>
-
     <section class="team-links">
         <h2>Meet the Team</h2>
         <div class="aya-image"></div>

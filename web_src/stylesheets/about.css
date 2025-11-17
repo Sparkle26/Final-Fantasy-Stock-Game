@@ -7,20 +7,20 @@
     box-sizing: border-box;
 }
 
-html {
+.html {
     color: #333;
     font-family: 'Kanit', sans-serif;
     height: 100%;
 }
 
-body {
+.body {
     min-height: 100vh;
     background-color: #FEFEFE;
     display: flex;
     flex-direction: column;
 }
 
-header {
+.header {
     display: flex;
     justify-content: space-between;
     align-items: center;
@@ -81,10 +81,6 @@ h2 {
     margin-bottom: 20px;
 }
 
-main {
-    display: flex;
-    height: calc(100vh - 70px);
-}
 
 .left {
     flex: 1;
@@ -101,7 +97,7 @@ main {
 
 .card {
     position: absolute;
-    top: -160px;
+    top: -490px;
     left: 400px;
     width: 100%;
     height: 100%;
@@ -151,35 +147,40 @@ main {
     color: #999;
 }
 
-footer{
+.footer,
+    p {
     font-size: 10px;
-}
+    margin-top: -50px;
+    }
 
-.teamlinks,
+.about-team,
 h2 {
     font-size: 50px;
+    margin-top: -710px;
 }
 
-aya-image {
-  width: 300px; /* Or any width */
-  height: 300px; /* Same as width for a circle */
-  background-image: url('/web_src/Images/aya-photo.jpeg');
+.aya-image {
+  width: 300px;
+  height: 300px;
+  background-image: url('../Images/aya-photo.jpeg');
   background-size: cover;
   border-radius: 50%;
   background-repeat: no-repeat;
 }
-ryder-image {
-  width: 300px; /* Or any width */
-  height: 300px; /* Same as width for a circle */
-  background-image: url('/web_src/Images/paul-photo.jpeg');
+
+.ryder-image {
+  width: 300px;
+  height: 300px;
+  background-image: url('../Images/ryder-photo.jpeg');
   background-size: cover;
   border-radius: 50%;
   background-repeat: no-repeat;
 }
-paul-image {
-  width: 300px; /* Or any width */
-  height: 300px; /* Same as width for a circle */
-  background-image: url('/web_src/Images/ryder-photo.jpeg');
+
+.paul-image {
+  width: 300px;
+  height: 300px;
+  background-image: url('../Images/paul-photo.jpeg');
   background-size: cover;
   border-radius: 50%;
   background-repeat: no-repeat;
