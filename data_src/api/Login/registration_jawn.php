@@ -32,7 +32,7 @@ if ($result->num_rows > 0) {
 }
 
 // Insert new user
-$stmt = $connection->prepare("INSERT INTO user (username, user_password, wins, losses) VALUES (?, ?, 0, 0)");
+$stmt = $connection->prepare("INSERT INTO user (username, password, wins, losses) VALUES (?, ?, 0, 0)");
 $stmt->bind_param("ss", $username, $password);
 if ($stmt->execute()) {
     header("Location: /fantasy/web_src/classes/Login/Login.php?success=registered");

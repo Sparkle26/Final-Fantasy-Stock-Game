@@ -7,7 +7,7 @@ require_once __DIR__ . '/../includes/db_connect.php';
 
 // Ensure POST fields exist
 if (!isset($_POST['username'], $_POST['password'])) {
-    header("Location: /fantasy/web_src/classes/Login/Login.php?error=missing");
+    header("Location: ../../../web_src/classes/Login/Login.php?error=missing");
     exit();
 }
 
@@ -27,18 +27,18 @@ $user = $result->fetch_assoc();
 
 // No such user
 if (!$user) {
-    header("Location: /fantasy/web_src/classes/Login/Login.php?error=invalid");
+    header("Location: ../../../web_src/classes/Login/Login.php?error=invalid");
     exit();
 }
 
 // Compare plain text passwords
 if ($password !== $user['user_password']) {
-    header("Location: /fantasy/web_src/classes/Login/Login.php?error=invalid");
+    header("Location: ../../../web_src/classes/Login/Login.php?error=invalid");
     exit();
 }
 
 // Success
 $_SESSION['user_id'] = $user['userID'];
-header("Location: /fantasy/web_src/users.php");
+header("Location: ../../../web_src/users.php");
 exit();
 ?>

@@ -1,6 +1,16 @@
+<?php
+ini_set('display_errors', 1);
+ini_set('display_startup_errors', 1);
+error_reporting(E_ALL);
+session_start();
+?>
 
-
+<!DOCTYPE html>
 <html>
+<head>
+    <title>Login</title>
+    <link rel="stylesheet" href="../../stylesheets/styles.css">
+</head>
         <section id="login">
         <div id="welcome-text">Login</div>
         <div>
