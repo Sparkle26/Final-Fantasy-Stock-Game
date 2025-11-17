@@ -1,11 +1,14 @@
 <?php
+ini_set('display_errors', 1);
+ini_set('display_startup_errors', 1);
+error_reporting(E_ALL);
 session_start();
-require_once "db_connect.php";
+require_once __DIR__ . '/../includes/db_connect.php';
 
-// Redirect if not logged in
+//Redirect if not logged in
 if (!isset($_SESSION['user_id'])) {
     header("Location: /web_src/classes/Login/Login.php");
-    exit();
+  exit();
 }
 
 // Fetch user info

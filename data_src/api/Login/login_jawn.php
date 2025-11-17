@@ -1,30 +1,44 @@
 <?php
+ini_set('display_errors', 1);
+ini_set('display_startup_errors', 1);
+error_reporting(E_ALL);
 session_start();
-require_once '../includes/db_connect.php'; // Make sure this defines $pdo
+require_once __DIR__ . '/../includes/db_connect.php';
 
-if ($_SERVER["REQUEST_METHOD"] === "POST") {
-    $username = $_POST['username'] ?? '';
-    $password = $_POST['password'] ?? '';
-
-    // Prepare and execute the query
-    $stmt = $pdo->prepare("SELECT userID, username, password FROM user WHERE username = ?");
-    $stmt->execute([$username]);
-    $user = $stmt->fetch(PDO::FETCH_ASSOC);
-
-    if ($user && password_verify($password, $user['password'])) {
-        // Login successful
-        $_SESSION['user_id'] = $user['userID'];
-        $_SESSION['username'] = $user['username'];
-
-        header("Location: /web_src/users.php");
-        exit();
-    } else {
-        // Invalid login
-        header("Location: /web_src/classes/Login/Login.php?error=invalid");
-        exit();
-    }
-} else {
-    header("Location: /web_src/classes/Login/Login.php");
+// Ensure POST fields exist
+if (!isset($_POST['username'], $_POST['password'])) {
+    header("Location: /fantasy/web_src/classes/Login/Login.php?error=missing");
     exit();
 }
+
+$username = trim($_POST['username']);
+$password = trim($_POST['password']);
+
+// Prepare statement
+$stmt = $connection->prepare("SELECT userID, user_password FROM user WHERE username = ?");
+if (!$stmt) {
+    die("Statement failed: " . htmlspecialchars($connection->error));
+}
+
+$stmt->bind_param("s", $username);
+$stmt->execute();
+$result = $stmt->get_result();
+$user = $result->fetch_assoc();
+
+// No such user
+if (!$user) {
+    header("Location: /fantasy/web_src/classes/Login/Login.php?error=invalid");
+    exit();
+}
+
+// Compare plain text passwords
+if ($password !== $user['user_password']) {
+    header("Location: /fantasy/web_src/classes/Login/Login.php?error=invalid");
+    exit();
+}
+
+// Success
+$_SESSION['user_id'] = $user['userID'];
+header("Location: /fantasy/web_src/users.php");
+exit();
 ?>
