@@ -10,6 +10,10 @@
         <section id="aboutPage">
             <div class="aboutHeader-textContainer">
                 <h1> About Paul </h1>
+                     <div>
+                        Hello! My name is Paul, and I am a junior Computer Science Major. I am a member
+                         of our swim team and play trombone in our symphonic band.
+                    </div>
             </div>
         </section>
         <div>
