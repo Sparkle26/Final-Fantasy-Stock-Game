@@ -20,15 +20,21 @@ session_start();
 if (isset($_GET['error'])) {
     $msg = '';
     switch ($_GET['error']) {
-        case 'missing': $msg = "Please fill in all fields."; break;
-        case 'nomatch': $msg = "Passwords do not match."; break;
-        case 'taken': $msg = "Username already taken."; break;
+        case 'missing':
+            $msg = "Please fill in all fields.";
+            break;
+        case 'nomatch':
+            $msg = "Passwords do not match.";
+            break;
+        case 'taken':
+            $msg = "Username already taken.";
+            break;
     }
-    if ($msg) echo "<p style='color:red;'>$msg</p>";
+    if ($msg) echo "<p style='color:red; font-weight:bold;'>$msg</p>";
 }
 
 if (isset($_GET['success']) && $_GET['success'] === 'registered') {
-    echo "<p style='color:green;'>Registration successful! You can log in now.</p>";
+    echo "<p style='color:green; font-weight:bold;'>Registration successful! You can log in now.</p>";
 }
 ?>
 

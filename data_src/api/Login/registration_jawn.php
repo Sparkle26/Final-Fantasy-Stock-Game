@@ -6,7 +6,7 @@ session_start();
 require_once __DIR__ . '/../includes/db_connect.php'; // same MySQLi connection
 
 if (!isset($_POST['username'], $_POST['password'], $_POST['confirm_password'])) {
-    header("Location: /fantasy/web_src/classes/Login/Registration.php?error=missing");
+    header("Location: ../../../web_src/classes/Login/Registration.php?error=missing");
     exit();
 }
 
@@ -16,7 +16,7 @@ $confirm = trim($_POST['confirm_password']);
 
 // Check passwords match
 if ($password !== $confirm) {
-    header("Location: /fantasy/web_src/classes/Login/Registration.php?error=nomatch");
+    header("Location: ../../../web_src/classes/Login/Registration.php?error=nomatch");
     exit();
 }
 
@@ -27,15 +27,15 @@ $stmt->execute();
 $result = $stmt->get_result();
 
 if ($result->num_rows > 0) {
-    header("Location: /fantasy/web_src/classes/Login/Registration.php?error=taken");
+    header("Location: ../../../web_src/classes/Login/Registration.php?error=taken");
     exit();
 }
 
 // Insert new user
-$stmt = $connection->prepare("INSERT INTO user (username, password, wins, losses) VALUES (?, ?, 0, 0)");
+$stmt = $connection->prepare("INSERT INTO user (username, user_password, wins, losses) VALUES (?, ?, 0, 0)");
 $stmt->bind_param("ss", $username, $password);
 if ($stmt->execute()) {
-    header("Location: /fantasy/web_src/classes/Login/Login.php?success=registered");
+    header("Location: ../../../web_src/classes/Login/Login.php?success=registered");
     exit();
 } else {
     die("Error creating user: " . htmlspecialchars($stmt->error));
