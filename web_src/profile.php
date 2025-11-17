@@ -25,7 +25,7 @@ $user = $result->fetch_assoc();
 <head>
     <meta charset="UTF-8">
     <title>User Dashboard</title>
-    <link rel="stylesheet" href="styles.css">
+    <link rel="profile.css" href="profile.css">
 </head>
 <body>
     <h2>Welcome, <?php echo htmlspecialchars($user['username']); ?>!</h2>
