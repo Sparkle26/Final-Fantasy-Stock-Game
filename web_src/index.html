@@ -1,33 +1,39 @@
 <!DOCTYPE html>
-<HTML>
-<link rel="stylesheet" href="stylesheets/styles.css">
-<BODY>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <link rel="stylesheet" href="stylesheets/styles.css" />
+  <title>Fantasy Stocks</title>
+</head>
+
+<body>
 <header class="site-header">
   <h1 class="site-title">Fantasy Stocks</h1>
+  <nav class = "site-nav">
   <ul>
     <li><a href="index.html">Home</a></li>
-    <li><a href="users.php">Profile</a></li>
+    <li><a href="profile.php">Profile</a></li>
     <li><a href="about.php">About</a></li>
-
   </ul>
-
 </header>
-<main class = "main">
-  <h2> Welcome!</h2>
-  <p> Coming Soon </p>
-</main>
 
-<form action= "/data_src/api/Login/login_jawn.php" method= "post">
-  <input type="text" id="username" name="username" placeholder="Username" required><br>
-  <input type="password" id="password" name="password" placeholder="Password" required><br>
-  <input type="submit" value="Submit" class="submit-button">
-</form>
+<main class="main-content">
+  <div class="left-content">
+    <h2>Welcome!</h2>
+    <p>Coming Soon</p>
 
-<img class="homeScreenImage" src="/web_src/Images/StockPhoto.png" alt="Home Screen Image">
+    <form action="/data_src/api/Login/login_jawn.php" method="post">
+      <input type="text" id="username" name="username" placeholder="Username" required><br>
+      <input type="password" id="password" name="password" placeholder="Password" required><br>
+      <input type="submit" value="Submit" class="submit-button">
+    </form>
+  </div>
 
+  <img class="homeScreenImage" src="/web_src/Images/StockPhoto.png" alt="Home Screen Image">
 
   <div class="bottom-bar"></div>
 
-</BODY>
-</HTML>
+</main>
 
+</body>
+</html>

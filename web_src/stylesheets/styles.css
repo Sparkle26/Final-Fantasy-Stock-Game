@@ -1,23 +1,14 @@
 @import url('https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@300;400;500;600;700;800&display=swap');
 
 body {
-  background-color: #fff;
+  background-color: #FEFEFE;
   color: #000;
-  font-family: 'Plus Jakarta Sans', system-ui, -apple-system, 'Segoe UI', Roboto, 'Helvetica Neue', Arial, sans-serif;
+  font-family: 'Plus Jakarta Sans', sans-serif;
   margin: 0;
   padding: 0;
 }
 
-/* Title */
-.site-title,
-.site-header h1 {
-  margin: 0;
-  font-size: 28px;
-  color: #000;
-  margin-left: 20px;
-}
-
-/* Header styling */
+/* Header */
 .site-header {
   display: flex;
   align-items: center;
@@ -29,42 +20,30 @@ body {
 }
 
 .site-title {
-  text-align: left;
+  font-size: 28px;
+  margin-left: 20px;
 }
 
-/* Navigation */
-ul {
+/* Nav */
+.site-nav ul {
   list-style: none;
-  margin: 0;
-  padding: 0;
   display: flex;
-  justify-content: flex-end; 
-  align-items: center;
-  gap: 8px; 
-}
-
-ul li {
+  gap: 8px;
   margin: 0;
   padding: 0;
 }
 
-ul li a {
-  display: block;
+.site-nav ul li a {
   color: #000;
   padding: 14px 16px;
   text-decoration: none;
 }
 
-ul li a:hover {
+.site nav ul li a:hover {
   color: #3DB5E6;
 }
 
-/* Optional container */
-.button-group {
-  margin: 40px 20px;
-}
-
-/* Main content */
+/* Main layout */
 main,
 h2 {
   font-size: 50px;
@@ -82,23 +61,24 @@ p {
 form input{
     font-family: 'Plus Jakarta Sans', system-ui, -apple-system, 'Segoe UI', Roboto, 'Helvetica Neue', Arial, sans-serif;
     margin: 10px;
-    margin-left: 40px;
+    margin-left: 20px;
     padding: 8px;
     border: 1px solid #ccc;
     border-radius: 4px;
 }
 
 .homeScreenImage {
-  width: 500px;
-  height: auto;
+  width: 1300px;
+  height: 770px;
   border-radius: 63px 0 0 0;
   position: absolute;
   top: 120px;
-  right: 50px;
+  right: 0px;
+  position: fixed;
 }
 
 .submit-button {
-  margin-left: 40px;
+  margin-left: 20px;
   padding: 8px 14px;
   border-radius: 4px;
   border: none;
@@ -121,4 +101,5 @@ form input{
   height: 67px;
   background-color: #5E845B;
   z-index: 10;
+  
 }

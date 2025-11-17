@@ -1,14 +1,45 @@
+@import url('https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@300;400;500;600;700;800&display=swap');
+
+
+.content {
+    h2 {
+    display: flex;
+    margin-top: -50px ;
+    width: 437px;
+    flex-direction: column;
+    justify-content: center;
+    color: #1E1E1E;
+}
+}
+.about-section p {
+    display: flex;
+    width: 496px;
+    flex-direction: column;
+    justify-content: center;
+    color: #1E1E1E;
+    font-family: "Plus Jakarta Sans";
+    font-size: 20px;
+    font-style: normal;
+    font-weight: 500;
+    line-height: 121.2%; /* 24.24px */
+    margin-bottom: 50px; /* adjust spacing as needed */
+}
+
+
+
 body {
     font-family: Arial, sans-serif;
     margin: 0;
     padding: 0;
-    background-color: #ffffff;
+    background-color: #FEFEFE;
     display: flex;
     flex-direction: column;
     min-height: 100vh;
+    
 }
 
 aboutHeader-textContainer {
     text-align: center;
     border: 1px solid black;
 }
+
