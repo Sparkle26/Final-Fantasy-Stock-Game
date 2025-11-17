@@ -39,6 +39,6 @@ if ($password !== $user['user_password']) {
 
 // Success
 $_SESSION['user_id'] = $user['userID'];
-header("Location: ../../../web_src/users.php");
+header("Location: ../../../web_src/profile.php");
 exit();
 ?>
