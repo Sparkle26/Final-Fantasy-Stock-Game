@@ -51,9 +51,9 @@ require_once "../data_src/api/includes/db_connect.php";
         <section class="team-links">
             <h2>Meet the Team</h2>
             <ul>
-                <li><a href="Aya.php">Aya</a></li>
-                <li><a href="Paul.php">Paul</a></li>
-                <li><a href="Ryder.php">Ryder</a></li>
+                <li><a href="general/aboutUs/Aya.php">Aya</a></li>
+                <li><a href="general/aboutUs/Paul.php">Paul</a></li>
+                <li><a href="general/aboutUS/Ryder.php">Ryder</a></li>
             </ul>
         </section>
     </main>
