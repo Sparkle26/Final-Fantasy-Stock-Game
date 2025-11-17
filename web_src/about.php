@@ -51,22 +51,22 @@ require_once "../data_src/api/includes/db_connect.php";
         <div class="card-container">
 
             <div class="card" 
-                style="--image: url('ftp://etowndb.com/web_src/Images/01aa16e441c66aafc86798964bf6649a.jpg'); 
+                style="--image: url('/web_src/Images/_ (1).jpeg'); 
                        --angle: -5deg; --x: 5%; --y: 15%; 
                        --caption: 'Photo of us working'"></div>
 
             <div class="card" 
-                style="--image: url('ftp://etowndb.com/web_src/Images/170803.jpg'); 
+                style="--image: url('/web_src/Images/01aa16e441c66aafc86798964bf6649a.jpg'); 
                        --angle: -1deg; --x: -10%; --y: -20%; 
                        --caption: 'Photo of some computer screens'"></div>
 
             <div class="card" 
-                style="--image: url('ftp://etowndb.com/web_src/Images/Barbie%20dreamhouse%E2%9C%AD.jpg'); 
+                style="--image: url('/web_src/Images/170803.jpg'); 
                        --angle: -4deg; --x: -20%; --y: 5%; 
                        --caption: 'Our poster'"></div>
 
             <div class="card" 
-                style="--image: url('ftp://etowndb.com/web_src/Images/_%20%281%29.jpeg'); 
+                style="--image: url('/web_src/Images/Barbie dreamhouse✭.jpg'); 
                        --angle: 7deg; --x: 10%; --y: -7%; 
                        --caption: 'Us mock presenting maybe'"></div>
 
@@ -83,6 +83,10 @@ require_once "../data_src/api/includes/db_connect.php";
 
     <section class="team-links">
         <h2>Meet the Team</h2>
+        <div class="aya-image"></div>
+        <div class="ryder-image"></div>
+        <div class="paul-image"></div>
+
         <ul>
             <li><a href="general/aboutUs/Aya.php">Aya</a></li>
             <li><a href="general/aboutUs/Paul.php">Paul</a></li>

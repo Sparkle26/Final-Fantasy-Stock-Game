@@ -154,3 +154,33 @@ main {
 footer{
     font-size: 10px;
 }
+
+.teamlinks,
+h2 {
+    font-size: 50px;
+}
+
+aya-image {
+  width: 300px; /* Or any width */
+  height: 300px; /* Same as width for a circle */
+  background-image: url('/web_src/Images/aya-photo.jpeg');
+  background-size: cover;
+  border-radius: 50%;
+  background-repeat: no-repeat;
+}
+ryder-image {
+  width: 300px; /* Or any width */
+  height: 300px; /* Same as width for a circle */
+  background-image: url('/web_src/Images/paul-photo.jpeg');
+  background-size: cover;
+  border-radius: 50%;
+  background-repeat: no-repeat;
+}
+paul-image {
+  width: 300px; /* Or any width */
+  height: 300px; /* Same as width for a circle */
+  background-image: url('/web_src/Images/ryder-photo.jpeg');
+  background-size: cover;
+  border-radius: 50%;
+  background-repeat: no-repeat;
+}
