@@ -70,8 +70,6 @@ require_once "../data_src/api/includes/db_connect.php";
                        --caption: 'Us mock presenting maybe'"></div>
 
         </div>
-        <hr class="hr">
-
         <br>
     </section>
 
