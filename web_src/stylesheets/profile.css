@@ -48,3 +48,10 @@
 .site-nav ul li a:hover {
     color: #3DB5E6;
 }
+
+
+.profile-body,
+h2 {
+    margin-left: 60px;
+
+}
