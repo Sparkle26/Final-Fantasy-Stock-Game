@@ -43,6 +43,7 @@ body {
   color: #3DB5E6;
 }
 
+/* Main layout */
 .profile-body,
 h2 {
     margin-left: 32px;
@@ -50,7 +51,7 @@ h2 {
 }
 
 .profile-body,
-h2 {
+p {
     margin-left: 32px;
-    font-size: 50px; ;
+    font-size: 10px; ;
 }
