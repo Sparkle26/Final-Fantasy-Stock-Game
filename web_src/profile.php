@@ -24,10 +24,27 @@ $user = $result->fetch_assoc();
 
 <!DOCTYPE html>
 <html lang="en">
+    
+<header class="site-header">
+    <div class="site-title-container">
+        <h1 class="site-title">Fantasy Stocks</h1>
+    </div>
+
+    <nav class="site-nav">
+        <ul class="site-nav-list">
+            <li><a href="index.html">Home</a></li>
+            <li><a href="profile.php">Profile</a></li>
+            <li><a href="about.php">About</a></li>
+        </ul>
+    </nav>
+</header>
+
 <head>
     <meta charset="UTF-8">
     <title>User Dashboard</title>
-    <link rel="stylesheet" href="profile.css">
+    <link rel="profile.css" href="profile.css">
+    <link rel="stylesheet" href="stylesheets/styles.css">
+
 </head>
 <body>
     <header class="site-header">

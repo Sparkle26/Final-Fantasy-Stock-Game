@@ -147,16 +147,26 @@ h2 {
     color: #999;
 }
 
-.footer,
-    p {
-    font-size: 10px;
-    margin-top: -50px;
-    }
+.hr {
+    display: block;
+    width: 100%;
+    border: none;
+    height: 2px;
+    background-color: gray;
+    margin: -500px 0;   
+}
 
-.about-team,
-h2 {
+.about-team {
     font-size: 50px;
-    margin-top: -710px;
+    text-align: center;
+    margin-top: 50px 0 30px 0;
+}
+
+.about-team h2 {
+    font-size: 50px;
+    margin: 0; 
+    margin-left: 20px;
+    margin-top: -20px;
 }
 
 .aya-image {
@@ -185,3 +195,9 @@ h2 {
   border-radius: 50%;
   background-repeat: no-repeat;
 }
+
+.footer,
+    p {
+    font-size: 10px;
+    margin-top: -50px;
+    }

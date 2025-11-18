@@ -30,7 +30,6 @@ require_once "../data_src/api/includes/db_connect.php";
 </header>
 
 <main class="about-main">
-
     <section class="about-section">
         <h2>WHO WE ARE</h2>
 
@@ -45,7 +44,6 @@ require_once "../data_src/api/includes/db_connect.php";
             to frontend design and user <br> experience. This project represents our shared interest
             in technology and markets.
         </p>
-    </section>
 
     <section class="card-section">
         <div class="card-container">
@@ -71,19 +69,19 @@ require_once "../data_src/api/includes/db_connect.php";
                        --caption: 'Us mock presenting maybe'"></div>
 
         </div>
-        <div style="border-bottom: 3px solid #000; margin: 20px 0; height: 1px;"></div>
+        <hr class="hr">
+
+        <br>
     </section>
 
-<br> 
-
 </main>
+<hr class="hr">
 <main class="about-team">
-    <section class="team-links">
         <h2>Meet the Team</h2>
         <div class="aya-image"></div>
         <div class="ryder-image"></div>
         <div class="paul-image"></div>
-
+    <section class="team-links">
         <ul>
             <li><a href="general/aboutUs/Aya.php">Aya</a></li>
             <li><a href="general/aboutUs/Paul.php">Paul</a></li>
