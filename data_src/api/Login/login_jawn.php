@@ -15,7 +15,7 @@ $username = trim($_POST['username']);
 $password = trim($_POST['password']);
 
 // Prepare statement
-$stmt = $connection->prepare("SELECT userID, user_password FROM user WHERE username = ?");
+$stmt = $connection->prepare("SELECT usersID, password FROM users WHERE username = ?");
 if (!$stmt) {
     die("Statement failed: " . htmlspecialchars($connection->error));
 }
@@ -32,13 +32,13 @@ if (!$user) {
 }
 
 // Compare plain text passwords
-if ($password !== $user['user_password']) {
+if ($password !== $user['password']) {
     header("Location: ../../../web_src/classes/Login/Login.php?error=invalid");
     exit();
 }
 
 // Success
-$_SESSION['user_id'] = $user['userID'];
+$_SESSION['users_id'] = $user['usersID'];
 header("Location: ../../../web_src/profile.php");
 exit();
 ?>

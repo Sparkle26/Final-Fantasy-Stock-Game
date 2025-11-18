@@ -21,7 +21,7 @@ if ($password !== $confirm) {
 }
 
 // Check if username already exists
-$stmt = $connection->prepare("SELECT userID FROM user WHERE username = ?");
+$stmt = $connection->prepare("SELECT usersID FROM users WHERE username = ?");
 $stmt->bind_param("s", $username);
 $stmt->execute();
 $result = $stmt->get_result();
@@ -32,7 +32,7 @@ if ($result->num_rows > 0) {
 }
 
 // Insert new user
-$stmt = $connection->prepare("INSERT INTO users (username, user_password, wins, losses) VALUES (?, ?, 0, 0)");
+$stmt = $connection->prepare("INSERT INTO users (username, password, wins, losses) VALUES (?, ?, 0, 0)");
 $stmt->bind_param("ss", $username, $password);
 if ($stmt->execute()) {
     header("Location: ../../../web_src/classes/Login/Login.php?success=registered");

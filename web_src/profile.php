@@ -7,14 +7,14 @@ require_once __DIR__ . '/../data_src/api/includes/db_connect.php';
 require_once 'classes/NavBar.php';
 
 //Redirect if not logged in
-if (!isset($_SESSION['user_id'])) {
+if (!isset($_SESSION['users_id'])) {
     header("Location: /web_src/classes/Login/Login.php");
   exit();
 }
 
 // Fetch user info
-$stmt = $connection->prepare("SELECT username, wins, losses FROM user WHERE userID = ?");
-$stmt->bind_param("i", $user_id);
+$stmt = $connection->prepare("SELECT username, wins, losses FROM users WHERE usersID = ?");
+$stmt->bind_param("i", $users_id);
 $stmt->execute();
 $result = $stmt->get_result();
 $user = $result->fetch_assoc();
