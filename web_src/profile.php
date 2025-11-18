@@ -43,7 +43,6 @@ $user = $result->fetch_assoc();
 <head>
     <meta charset="UTF-8">
     <link rel="stylesheet" href="stylesheets/profile.css">
-    <link rel="stylesheet" href="stylesheets/styles.css">
 
 </head>
 
