@@ -13,6 +13,7 @@ if (!isset($_SESSION['users_id'])) {
 }
 
 // Fetch user info
+$users_id = $_SESSION['users_id'];
 $stmt = $connection->prepare("SELECT username, wins, losses FROM users WHERE usersID = ?");
 $stmt->bind_param("i", $users_id);
 $stmt->execute();
@@ -26,7 +27,7 @@ $user = $result->fetch_assoc();
 <head>
     <meta charset="UTF-8">
     <title>User Dashboard</title>
-    <link rel="profile.css" href="profile.css">
+    <link rel="stylesheet" href="profile.css">
 </head>
 <body>
     <header class="site-header">
