@@ -7,17 +7,12 @@
     box-sizing: border-box;
 }
 
-.html {
-    color: #333;
-    font-family: 'Kanit', sans-serif;
-    height: 100%;
-}
-
 .body {
     min-height: 100vh;
     background-color: #FEFEFE;
     display: flex;
     flex-direction: column;
+    font-family: 'Kanit', sans-serif;
 }
 
 .header {
@@ -28,8 +23,6 @@
     padding: 0 24px;
     border-bottom: 1px solid rgba(0,0,0,.1);
     background: #fff;
-    position: relative;
-    z-index: 10;
 }
 
 .site-nav ul {
@@ -49,155 +42,155 @@
     color: #3DB5E6;
 }
 
-.about-section h2 {
-    margin-left: 29px;
-    margin-top: -56px;
-    font-size: 50px;
-    width: 437px;
+.about-layout {
     display: flex;
-    color: #1E1E1E;
-    flex-direction: column;
-    justify-content: center;
+    justify-content: space-between;
+    align-items: flex-start;
+    gap: 40px;
+    padding: 20px 0 0 29px;
+    position: relative;
 }
 
-.about-section p {
-    margin-left: 29px;
-    margin-top: 20px;
-    margin-bottom: 50px;
-    width: 496px;
+.about-left {
+    flex: 1;
+    max-width: 500px;
+}
+
+.about-left h2 {
+    font-size: 50px;
     color: #1E1E1E;
+    margin-bottom: 20px;
+    margin-top: 70px; 
+}
+
+.about-left p {
+    margin-top: 15px; 
     font-family: "Plus Jakarta Sans", sans-serif;
     font-size: 20px;
     font-weight: 500;
-    line-height: 121%;
-    text-align: left;
+    color: #1E1E1E;
+    line-height: 1.25;
 }
 
-.teamlinks,
-h2 {
-    display: block;
-    margin-top: 50px;
-    margin-left: 29px;
-    margin-bottom: 20px;
-}
-
-
-.left {
+.about-right {
     flex: 1;
-    background-color: #f7f7f6;
-    height: 100%;
+    display: flex;
+    justify-content: flex-end;
+    position: relative;
 }
 
-.card-container {
-    position: relative;
-    width: 65vmin;
-    height: 80vmin;
-    margin: auto;
+.card-wrapper {
+    width: 600px;
+    height: 100px;
+    position: absolute;
+    right: 0;
+    top: 95px; 
 }
 
 .card {
     position: absolute;
-    top: -490px;
-    left: 400px;
-    width: 100%;
-    height: 100%;
-    background: #f5f5f5;
-    border-radius: 2px;
-    box-shadow: 2px 2px 5px rgba(17, 17, 17, .35);
-    transform: translate(var(--x), var(--y)) scale(.35) rotate(var(--angle));
-    transition: transform .35s ease-out;
-    will-change: transform;
+    width: 260px;
+    height: 320px;
+    background: white;
+    border-radius: 4px;
+    padding: 12px;
+    box-shadow: 0 8px 18px rgba(0,0,0,0.25);
+    transform: rotate(var(--angle)) translate(var(--x), var(--y));
+    transition: transform .35s ease-out, z-index .2s;
 }
 
 .card:hover {
-    transform: scale(1) rotate(0deg);
-    z-index: 1;
+    transform: scale(1.1) rotate(0deg);
+    z-index: 20;
 }
 
 .card:before {
     content: "";
     display: block;
-    width: 90%;
+    width: 100%;
     height: 80%;
-    margin: 5%;
     background: var(--image) center/cover no-repeat;
-    box-shadow: inset 0 0 5px rgba(34, 34, 34, .35);
-    border-radius: 2px;
-    filter: sepia(.2) brightness(.9) contrast(1.2);
-    opacity: .8;
-    transition: opacity .35s ease-out;
-}
-
-.card:hover:before {
-    opacity: 1;
+    border-radius: 3px;
 }
 
 .card:after {
     content: var(--caption);
     display: block;
-    font-size: 3vmin;
-    color: #555;
-    opacity: .75;
     text-align: center;
     margin-top: 10px;
-}
-
-.heading {
-    margin: 2vmin 3vmin;
-    color: #999;
+    font-size: 15px;
+    color: #555;
+    font-family: "Plus Jakarta Sans", sans-serif;
 }
 
 .hr {
-    display: block;
     width: 100%;
-    border: none;
     height: 2px;
     background-color: gray;
-    margin: -500px 0;
+    margin: 200px auto 10px auto;
 }
 
-.about-team {
+.about-team,
+h3 {
     font-size: 50px;
     text-align: center;
-    margin-top: 50px 0 30px 0;
+    margin-top: 70px;
+    color: #1E1E1E;
+    margin-bottom: 100px;
 }
 
-.about-team h2 {
-    font-size: 50px;
-    margin: 0; 
-    margin-left: 20px;
-    margin-top: -20px;
+.team-container {
+    display: flex;
+    justify-content: center;
+    gap: 100px;
+    margin-top: 80px;
 }
 
-.aya-image {
-  width: 300px;
-  height: 300px;
-  background-image: url('../Images/aya-photo.jpeg');
-  background-size: cover;
-  border-radius: 50%;
-  background-repeat: no-repeat;
+.team-member {
+    text-align: center;
+    font-family: "Plus Jakarta Sans", sans-serif;
 }
 
-.ryder-image {
-  width: 300px;
-  height: 300px;
-  background-image: url('../Images/ryder-photo.jpeg');
-  background-size: cover;
-  border-radius: 50%;
-  background-repeat: no-repeat;
+.team-member .profile-img {
+    width: 300px;
+    height: 300px;
+    border-radius: 50%;
+    background-size: cover;
+    background-position: center;
+    background-repeat: no-repeat;
+    margin-bottom: 15px;
 }
 
-.paul-image {
-  width: 300px;
-  height: 300px;
-  background-image: url('../Images/paul-photo.jpeg');
-  background-size: cover;
-  border-radius: 50%;
-  background-repeat: no-repeat;
+.aya-image { background-image: url('../Images/aya-photo.jpeg'); }
+.ryder-image { background-image: url('../Images/ryder-photo.jpeg'); }
+.paul-image { background-image: url('../Images/paul-photo.jpeg'); }
+
+.team-member a {
+    display: block;
+    margin-top: 10px;
+    font-size: 22px;
+    font-weight: 600;
+    text-decoration: none;
+    color: #1e1e1e;
+}
+
+.team-member a:hover {
+    color: #3DB5E6;
+}
+
+.team-member .team-bio {
+    margin-top: 5px;
+    font-size: 16px;
+    font-weight: 400;
+    color: #555;
+    line-height: 1.3;
+    max-width: 280px;
+    margin-left: auto;
+    margin-right: auto;
 }
 
 .footer,
-    p {
-    font-size: 10px;
+bottom-footer {
+    font-size: 5px;
     margin-top: -50px;
-    }
+}

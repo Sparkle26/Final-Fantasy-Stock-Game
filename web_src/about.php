@@ -2,16 +2,13 @@
 session_start();
 require_once "../data_src/api/includes/db_connect.php";
 ?>
-
 <!DOCTYPE html>
 <html lang="en">
 <head>
     <meta charset="UTF-8">
     <title>About Our Team | Fantasy Stock Game</title>
-
     <link rel="stylesheet" href="stylesheets/about.css">
     <link rel="stylesheet" href="stylesheets/styles.css">
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
 </head>
 <body>
 
@@ -30,69 +27,89 @@ require_once "../data_src/api/includes/db_connect.php";
     </nav>
 </header>
 
-<main class="about-main">
-    <section class="about-section">
-        <h2>WHO WE ARE</h2>
+<section class="about-layout">
 
+    <div class="about-left">
+        <h2>WHO WE ARE</h2>
         <p>
             Welcome to the Fantasy Stock Game — a project built by a group of students 
-            passionate about combining finance, competition, and web development. 
-            Our goal is to bring the excitement <br> of fantasy sports into the world of investing.
+            passionate about combining finance, competition, and web development.
+            Our goal is to bring the excitement of fantasy sports into the&nbsp;<br>world of investing.
         </p>
 
         <p>
-            Each member of our team contributed <br> unique skills — from backend development <br> and data scraping 
-            to frontend design and user <br> experience. This project represents our shared interest
-            in technology and markets.
+            Each member of our team contributed unique skills — from backend development 
+            and data scraping to frontend design and user&nbsp; experience. This project 
+            represents our shared interest in technology and markets.
         </p>
+    </div>
 
-    <section class="card-section">
-        <div class="card-container">
+    <div class="about-right">
+        <div class="card-wrapper">
 
-            <div class="card" 
+            <div class="card"
                 style="--image: url('/web_src/Images/_ (1).jpeg'); 
-                       --angle: -5deg; --x: 5%; --y: 15%; 
-                       --caption: 'Photo of us working'"></div>
+                       --angle: -15deg; --x: 190px; --y: 90px;
+                       --caption: 'Photo of us working';">
+            </div>
 
-            <div class="card" 
+            <div class="card"
                 style="--image: url('/web_src/Images/01aa16e441c66aafc86798964bf6649a.jpg'); 
-                       --angle: -1deg; --x: -10%; --y: -20%; 
-                       --caption: 'Photo of some computer screens'"></div>
+                       --angle: 12deg; --x: -90px; --y: -40px;
+                       --caption: 'Computer screens';">
+            </div>
 
-            <div class="card" 
+            <div class="card"
                 style="--image: url('/web_src/Images/170803.jpg'); 
-                       --angle: -4deg; --x: -20%; --y: 5%; 
-                       --caption: 'Our poster'"></div>
+                       --angle: -10deg; --x: -40px; --y: 120px;
+                       --caption: 'Our poster';">
+            </div>
 
-            <div class="card" 
+            <div class="card"
                 style="--image: url('/web_src/Images/Barbie dreamhouse✭.jpg'); 
-                       --angle: 7deg; --x: 10%; --y: -7%; 
-                       --caption: 'Us mock presenting maybe'"></div>
+                       --angle: 18deg; --x: 100px; --y: -50px;
+                       --caption: 'Presentation moment';">
+            </div>
 
         </div>
-        <br>
-    </section>
+    </div>
 
-</main>
+</section>
+
 <hr class="hr">
-<main class="about-team">
-        <h2>Meet the Team</h2>
-        <div class="aya-image"></div>
-        <div class="ryder-image"></div>
-        <div class="paul-image"></div>
-    <section class="team-links">
-        <ul>
-            <li><a href="general/aboutUs/Aya.php">Aya</a></li>
-            <li><a href="general/aboutUs/Paul.php">Paul</a></li>
-            <li><a href="general/aboutUs/Ryder.php">Ryder</a></li>
-        </ul>
-    </section>
 
-</main>
+<section class="about-team">
+    <h3>Meet the Team</h3>
+    <div class="team-container">
+        <div class="team-member">
+            <div class="profile-img aya-image"></div>
+            <a href="https://www.linkedin.com/in/aya-zourgani/">Aya</a>
+            <p class="team-bio">Hey! I'm Aya, a senior majoring in Graphic Design and Computer Science at Elizabethtown College.
+                                I focus on front-end development, creating seamless and visually appealing user experiences.
+                                Welcome to our project. I hope you enjoy exploring it as much as we enjoyed building it!</p>
+        </div>
 
-<footer>
+        <div class="team-member">
+            <div class="profile-img ryder-image"></div>
+            <a href="https://www.linkedin.com/in/rpaulus1326/">Ryder</a>
+            <p class="team-bio">Hi! I'm a Junior International Business and Information Systems major with concentrations in Data Analytics<br> and Management.
+                                I focus on implementing features like login systems and database integration to make our projects functional and efficient.
+                                I'm excited to apply my skills in real-world applications. Connect with me on LinkedIn!.</p>
+        </div>
+
+        <div class="team-member">
+            <div class="profile-img paul-image"></div>
+            <a href="https://www.linkedin.com/in/pauldavis05/">Paul</a>
+            <p class="team-bio">Hello! My name is Paul, and I am a junior Computer Science major.
+                                I worked on the API development and some of the data scraping components
+                                to bring functionality and real-world data into <br> our Fantasy Stock Game.</p>
+        </div>
+    </div>
+</section>
+
+<bottom-footer>
     <p>&copy; <?= date("Y"); ?> Fantasy Stock Game Team. All rights reserved.</p>
-</footer>
+</bottom-footer>
 
 </body>
 </html>
