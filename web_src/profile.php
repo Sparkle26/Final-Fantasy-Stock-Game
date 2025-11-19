@@ -35,6 +35,7 @@ $user = $result->fetch_assoc();
             <li><a href="index.html">Home</a></li>
             <li><a href="profile.php">Profile</a></li>
             <li><a href="about.php">About</a></li>
+            <li><a href="leagues.php">League</a></li>
         </ul>
     </nav>
 </header>
