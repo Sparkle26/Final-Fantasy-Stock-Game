@@ -96,7 +96,8 @@ else {
 <head>
     <meta charset="UTF-8">
     <title>Leagues</title>
-    <link rel="stylesheet" href="profile.css">
+    <link rel="stylesheet" href="stylesheets/league.css">
+    <link rel="stylesheet" href="stylesheets/styles.css">
 </head>
 <body>
 
@@ -127,9 +128,9 @@ else {
 
         <?php foreach ($users as $user): ?>
             <tr>
-                <td><?php echo htmlspecialchars($user['username']); ?></td>
-                <td><?php echo htmlspecialchars($user['wins']); ?></td>
-                <td><?php echo htmlspecialchars($user['losses']); ?></td>
+                <td style="text-align:center"><?php echo htmlspecialchars($user['username']); ?></td>
+                <td style="text-align:center"><?php echo htmlspecialchars($user['wins']); ?></td>
+                <td style="text-align:center"><?php echo htmlspecialchars($user['losses']); ?></td>
             </tr>
         <?php endforeach; ?>
     </table>
@@ -147,9 +148,9 @@ else {
 
         <?php foreach ($leagues as $league): ?>
             <tr>
-                <td><?php echo htmlspecialchars($league['leagueName']); ?></td>
-                <td><?php echo htmlspecialchars($league['duration']); ?></td>
-                <td><?php echo htmlspecialchars($league['num_users']); ?></td>
+                <td style="text-align:center"><?php echo htmlspecialchars($league['leagueName']); ?></td>
+                <td style="text-align:center"><?php echo htmlspecialchars($league['duration']); ?></td>
+                <td style="text-align:center"><?php echo htmlspecialchars($league['num_users']); ?></td>
             </tr>
         <?php endforeach; ?>
     </table>
