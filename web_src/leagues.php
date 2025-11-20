@@ -5,6 +5,7 @@ error_reporting(E_ALL);
 session_start();
 
 require_once "../data_src/api/includes/db_connect.php"; // mysqli connection
+$extensions = ["jpg","jpeg","png","gif","webp"];
 
 // Ensure database connection exists
 if (!isset($connection) || !$connection) {
@@ -37,6 +38,7 @@ if ($isLoggedIn) {
     if ($leagueID) {
         $stmt = $connection->prepare("
             SELECT 
+                u.usersID,
                 u.username, 
                 u.wins, 
                 u.losses, 
@@ -122,14 +124,30 @@ else {
 
     <table>
         <tr>
-            <th>Username</th>
+            <th>User</th>
             <th>Wins</th>
             <th>Losses</th>
         </tr>
 
-        <?php foreach ($users as $user): ?>
+        <?php foreach ($users as $user):
+            $imagePath = '';
+            foreach ($extensions as $extension) {
+                $filePath = 'web_src/Images/userImages/' . htmlspecialchars($user['usersID']) . '.' . $extension;
+                if (file_exists($filePath)){
+                    $imagePath = $filePath;
+                    break;
+                }
+            }
+            if (empty($imagePath))
+                $imagePath = 'Images/userImages/missingUser.png';
+            ?>
             <tr>
-                <td><?php echo htmlspecialchars($user['username']); ?></td>
+                <td>
+                    <div>
+                        <img src="<?php echo $imagePath ?>" alt="Images/userImages/missingUser.png">
+                        <span><?php echo htmlspecialchars($user['username']); ?></span>
+                    </div>
+                </td>
                 <td><?php echo htmlspecialchars($user['wins']); ?></td>
                 <td><?php echo htmlspecialchars($user['losses']); ?></td>
             </tr>
@@ -147,9 +165,25 @@ else {
             <th>Number of Users</th>
         </tr>
 
-        <?php foreach ($leagues as $league): ?>
+        <?php foreach ($leagues as $league): 
+            $imagePath = '';
+            foreach ($extensions as $extension) {
+                $filePath = 'web_src/Images/leagueImages/' . htmlspecialchars($league['leagueID']) . '.' . $extension;
+                if (file_exists($filePath)){
+                    $imagePath = $filePath;
+                    break;
+                }
+            }
+            if (empty($imagePath))
+                $imagePath = 'Images/leagueImages/missingLeague.png';
+        ?>
             <tr>
-                <td><?php echo htmlspecialchars($league['leagueName']); ?></td>
+                <td>
+                    <div>
+                        <img src="<?php echo $imagePath ?>" alt="Images/leagueImages/missingLeague.png">
+                        <span><?php echo htmlspecialchars($league['leagueName']); ?></span>
+                    </div>
+                </td>
                 <td><?php echo htmlspecialchars($league['duration']); ?></td>
                 <td><?php echo htmlspecialchars($league['num_users']); ?></td>
             </tr>
