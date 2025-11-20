@@ -17,8 +17,8 @@ session_start();
             <li><a href="index.html">Home</a></li>
             <li><a href="profile.php">Profile</a></li>
             <li><a href="leagues.php">League</a></li>
-            <li><a href="about.php">About</a></li>
             <li><a href="stocks.php">Stocks</a></li>
+            <li><a href="about.php">About</a></li>
         </ul>
     </nav>
 </header>

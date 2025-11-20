@@ -22,6 +22,7 @@ require_once "../data_src/api/includes/db_connect.php";
             <li><a href="index.html">Home</a></li>
             <li><a href="profile.php">Profile</a></li>
             <li><a href="leagues.php">League</a></li>
+             <li><a href="stocks.php">Stocks</a></li>
             <li><a href="about.php">About</a></li>
         </ul>
     </nav>
