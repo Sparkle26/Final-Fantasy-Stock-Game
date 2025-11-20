@@ -7,6 +7,16 @@ session_start();
 
 <!DOCTYPE html>
 <html>
+    <header class="site-header">
+  <h1 class="site-title">Fantasy Stocks</h1>
+  <nav class = "site-nav">
+  <ul>
+    <li><a href="../../index.html">Home</a></li>
+    <li><a href="../../profile.php">Profile</a></li>
+    <li><a href="../../leagues.php">League</a></li>
+    <li><a href="../../about.php">About</a></li>
+  </ul>
+</header>
 <head>
     <title>Register</title>
     <link rel="stylesheet" href="../../stylesheets/styles.css">
