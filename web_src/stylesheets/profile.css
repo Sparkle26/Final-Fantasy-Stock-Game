@@ -8,7 +8,6 @@ body {
   padding: 0;
 }
 
-/* Header */
 .site-header {
   display: flex;
   align-items: center;
@@ -24,7 +23,6 @@ body {
   margin-left: 50px;
 }
 
-/* Nav */
 .site-nav ul {
   list-style: none;
   display: flex;
@@ -43,15 +41,90 @@ body {
   color: #3DB5E6;
 }
 
-/* Main layout */
-.profile-body,
-h2 {
-    margin-left: 32px;
-    font-size: 50px; ;
+.welcome-title {
+  margin-left: 65px;
+  font-size: 42px;
+  margin-top: 40px;
 }
 
-.profile-body,
-p {
-    margin-left: 32px;
-    font-size: 10px; ;
+.profile-section {
+  margin-left: 65px;
+  margin-top: 20px;
+  display: flex;
+  align-items: center;
+  gap: 40px;
+}
+
+.profile-img {
+  width: 150px;
+  height: 150px;
+  border-radius: 50%;
+  background-size: cover;
+  background-position: center;
+}
+
+.aya-image {
+  background-image: url('../Images/aya-photo.jpeg');
+}
+
+.stats-row {
+  display: flex;
+  flex-direction: row;
+  gap: 25px;
+  margin-top: -65px;
+}
+
+.stat-box {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.win-stat-title {
+  background: #07712e;
+  padding: 4px 12px;
+  border-radius: 6px;
+  font-size: 14px;
+  font-weight: 700;
+  color: #ffffff;
+}
+
+.loss-stat-title {
+  background: #a00707;
+  padding: 4px 12px;
+  border-radius: 6px;
+  font-size: 14px;
+  font-weight: 700;
+  color: #ffffff;
+}
+
+.stat-title {
+  background: #1766b6;
+  padding: 4px 12px;
+  border-radius: 6px;
+  font-size: 14px;
+  font-weight: 700;
+  color: #ffffff;
+}
+
+.stat-value {
+  font-size: 22px;
+  font-weight: 700;
+  margin-top: 6px;
+}
+
+.logout-btn {
+  margin-left: 65px;
+  margin-top: 30px;
+  display: inline-block;
+  padding: 10px 18px;
+  background-color: #3DB5E6;
+  color: white;
+  text-decoration: none;
+  border-radius: 6px;
+  font-weight: 600;
+}
+
+.logout-btn:hover {
+  background-color: #2b8ab4;
 }
