@@ -66,6 +66,11 @@ $user = $result->fetch_assoc();
             <div class="stat-value">0</div>
         </div>
 
+        <form action="classes/uploadImage.php"  method="POST" enctype="multipart/form-data">
+            <input type="file" name="fileToUpload" require>
+            <input type="submit" value="Upload Image">
+        </form>
+
     </div>
 </div>
 
