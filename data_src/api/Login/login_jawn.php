@@ -3,42 +3,83 @@ ini_set('display_errors', 1);
 ini_set('display_startup_errors', 1);
 error_reporting(E_ALL);
 session_start();
-require_once __DIR__ . '/../includes/db_connect.php';
 
-// Ensure POST fields exist
-if (!isset($_POST['username'], $_POST['password'])) {
-    header("Location: ../../../web_src/classes/Login/Login.php?error=missing");
-    exit();
+require_once "../data_src/api/includes/db_connect.php"; // mysqli connection
+
+// Ensure database connection exists
+if (!isset($connection) || !$connection) {
+    die("Database connection not found.");
 }
 
-$username = trim($_POST['username']);
-$password = trim($_POST['password']);
+// Correct session check
+$isLoggedIn = isset($_SESSION['users_id']);
 
-// Prepare statement
-$stmt = $connection->prepare("SELECT usersID, password FROM users WHERE username = ?");
-if (!$stmt) {
-    die("Statement failed: " . htmlspecialchars($connection->error));
-}
+// ------------------------
+// LOGGED-IN VIEW
+// ------------------------
+if ($isLoggedIn) {
 
-$stmt->bind_param("s", $username);
-$stmt->execute();
-$result = $stmt->get_result();
-$user = $result->fetch_assoc();
+    // 1. Get the user's leagueID
+    $stmt = $connection->prepare("SELECT leagueID FROM users WHERE usersID = ?");
+    $stmt->bind_param("i", $_SESSION['users_id']);
 
-// No such user
-if (!$user) {
-    header("Location: ../../../web_src/classes/Login/Login.php?error=invalid");
-    exit();
-}
+    if (!$stmt->execute()) {
+        die("Failed to get user's league: " . $stmt->error);
+    }
 
-// Compare plain text passwords
-if ($password !== $user['password']) {
-    header("Location: ../../../web_src/classes/Login/Login.php?error=invalid");
-    exit();
-}
+    $res = $stmt->get_result();
+    $userLeague = $res->fetch_assoc();
+    $stmt->close();
 
-// Success
-$_SESSION['users_id'] = $user['usersID'];
-header("Location: ../../../web_src/profile.php");
-exit();
-?>
+    $leagueID = $userLeague['leagueID'] ?? null;
+
+    // 2. Fetch leaderboard
+    if ($leagueID) {
+        $stmt = $connection->prepare("
+            SELECT 
+                u.username, 
+                u.wins, 
+                u.losses, 
+                l.leagueName
+            FROM users u
+            JOIN League l 
+                ON u.leagueID = l.leagueID
+            WHERE u.leagueID = ?
+            ORDER BY u.wins DESC
+        ");
+
+        $stmt->bind_param("i", $leagueID);
+
+        if (!$stmt->execute()) {
+            die("Failed to get leaderboard: " . $stmt->error);
+        }
+
+        $result = $stmt->get_result();
+        $users = $result->fetch_all(MYSQLI_ASSOC);
+        $stmt->close();
+    } else {
+        $users = [];
+    }
+
+} 
+// ------------------------
+// NOT LOGGED-IN VIEW
+// ------------------------
+else {
+    $sql = "
+        SELECT 
+            l.leagueID,
+            l.leagueName,
+            l.duration,
+            COUNT(u.usersID) AS num_users
+        FROM League l
+        LEFT JOIN users u 
+            ON l.leagueID = u.leagueID
+        GROUP BY 
+            l.leagueID, 
+            l.leagueName, 
+            l.duration
+        ORDER BY l.leagueName ASC
+    ";
+
+    $result = $connection->query($sql);
