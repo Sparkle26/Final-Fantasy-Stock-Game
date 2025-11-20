@@ -110,8 +110,8 @@ else {
         <ul class="site-nav-list">
             <li><a href="index.html">Home</a></li>
             <li><a href="profile.php">Profile</a></li>
-            <li><a href="about.php">About</a></li>
             <li><a href="leagues.php">League</a></li>
+            <li><a href="about.php">About</a></li>
         </ul>
     </nav>
 </header>
@@ -119,7 +119,7 @@ else {
 <?php if ($isLoggedIn && !empty($users)): ?>
     <h1>Leaderboard for <?php echo htmlspecialchars($users[0]['leagueName']); ?></h1>
 
-    <table border="1">
+    <table>
         <tr>
             <th>Username</th>
             <th>Wins</th>
@@ -128,9 +128,9 @@ else {
 
         <?php foreach ($users as $user): ?>
             <tr>
-                <td style="text-align:center"><?php echo htmlspecialchars($user['username']); ?></td>
-                <td style="text-align:center"><?php echo htmlspecialchars($user['wins']); ?></td>
-                <td style="text-align:center"><?php echo htmlspecialchars($user['losses']); ?></td>
+                <td><?php echo htmlspecialchars($user['username']); ?></td>
+                <td><?php echo htmlspecialchars($user['wins']); ?></td>
+                <td><?php echo htmlspecialchars($user['losses']); ?></td>
             </tr>
         <?php endforeach; ?>
     </table>
@@ -139,7 +139,7 @@ else {
 
     <h1>All Leagues</h1>
 
-    <table border="1">
+    <table>
         <tr>
             <th>League Name</th>
             <th>Duration</th>
@@ -148,9 +148,9 @@ else {
 
         <?php foreach ($leagues as $league): ?>
             <tr>
-                <td style="text-align:center"><?php echo htmlspecialchars($league['leagueName']); ?></td>
-                <td style="text-align:center"><?php echo htmlspecialchars($league['duration']); ?></td>
-                <td style="text-align:center"><?php echo htmlspecialchars($league['num_users']); ?></td>
+                <td><?php echo htmlspecialchars($league['leagueName']); ?></td>
+                <td><?php echo htmlspecialchars($league['duration']); ?></td>
+                <td><?php echo htmlspecialchars($league['num_users']); ?></td>
             </tr>
         <?php endforeach; ?>
     </table>
@@ -159,7 +159,7 @@ else {
     <p>No data available.</p>
 <?php endif; ?>
 
-<a href="/web_src/classes/Login/Logout.php">Logout</a>
+<a class="logout-button" href="/web_src/classes/Login/Logout.php">Logout</a>
 
 </body>
 </html>
