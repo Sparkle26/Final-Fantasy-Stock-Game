@@ -194,7 +194,9 @@ else {
     <p>No data available.</p>
 <?php endif; ?>
 
-<a class="logout-button" href="/web_src/classes/Login/Logout.php">Logout</a>
+<?php if ($isLoggedIn): ?>
+    <a class="logout-button" href="/web_src/classes/Login/Logout.php">Logout</a>
+<?php endif; ?>
 
 <div class="bottom-bar"></div>
 
