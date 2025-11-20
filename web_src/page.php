@@ -3,13 +3,8 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<<<<<<< HEAD
     <title>Demo Page</title>
     <link rel="stylesheet" href="styles.css">
-=======
-    <title>Aya's Chat</title>
-    <link rel="stylesheet" href="stylesheets/styles.css">
->>>>>>> e641773 (fix)
 
 <?php
 // The URL that returns JSON data for rooms
