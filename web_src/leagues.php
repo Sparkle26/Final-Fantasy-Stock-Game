@@ -132,7 +132,8 @@ else {
         <?php foreach ($users as $user):
             $imagePath = '';
             foreach ($extensions as $extension) {
-                $filePath = 'web_src/Images/userImages/' . htmlspecialchars($user['usersID']) . '.' . $extension;
+                $filePath = 'Images/userImages/user_' 
+                . htmlspecialchars($user['usersID']) . '.' . $extension;
                 if (file_exists($filePath)){
                     $imagePath = $filePath;
                     break;
@@ -144,7 +145,7 @@ else {
             <tr>
                 <td>
                     <div>
-                        <img src="<?php echo $imagePath ?>" alt="Images/userImages/missingUser.png">
+                        <img src="<?php echo $imagePath ?>" alt="">
                         <span><?php echo htmlspecialchars($user['username']); ?></span>
                     </div>
                 </td>
