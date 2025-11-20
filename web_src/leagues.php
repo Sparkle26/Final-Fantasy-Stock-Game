@@ -142,7 +142,7 @@ else {
     <table>
         <tr>
             <th>League Name</th>
-            <th>Duration</th>
+            <th>Duration (# Weeks)</th>
             <th>Number of Users</th>
         </tr>
 
@@ -160,6 +160,8 @@ else {
 <?php endif; ?>
 
 <a class="logout-button" href="/web_src/classes/Login/Logout.php">Logout</a>
+
+<div class="bottom-bar"></div>
 
 </body>
 </html>
