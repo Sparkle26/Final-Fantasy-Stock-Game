@@ -10,7 +10,7 @@ if (!isset($_SESSION['users_id'])) {
     header("Location: /web_src/classes/Login/Login.php");
     exit();
 }
-
+/* User Info */
 $users_id = $_SESSION['users_id'];
 $stmt = $connection->prepare("SELECT username, wins, losses FROM users WHERE usersID = ?");
 $stmt->bind_param("i", $users_id);
