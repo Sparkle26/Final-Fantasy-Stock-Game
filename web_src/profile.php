@@ -32,6 +32,28 @@ while ($row = $stocksResult->fetch_assoc()) {
     $userStocks[] = $row['ticker'];
 }
 
+/* Handle Save My Stock List submission */
+if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['stocks'])) {
+
+    // Clear existing stocks (optional depending on your design)
+    $del = $connection->prepare("DELETE FROM users_stocks WHERE usersID = ?");
+    $del->bind_param("i", $users_id);
+    $del->execute();
+
+    // Insert selected stocks
+    $ins = $connection->prepare("INSERT INTO users_stocks (usersID, ticker) VALUES (?, ?)");
+
+    foreach ($_POST['stocks'] as $ticker) {
+        $ins->bind_param("is", $users_id, $ticker);
+        $ins->execute();
+    }
+
+    // Refresh page so updated list shows immediately
+    header("Location: profile.php");
+    exit();
+}
+
+
 ?>
 
 <!DOCTYPE html>
@@ -40,20 +62,22 @@ while ($row = $stocksResult->fetch_assoc()) {
     <meta charset="UTF-8">
     <title>User Dashboard</title>
     <link rel="stylesheet" href="stylesheets/profile.css">
+    <link rel="stylesheet" href="stylesheets/stocks.css">
 </head>
 
 <body>
 
 <header class="site-header">
-    <h1 class="site-title">Fantasy Stocks</h1>
+    <div class="site-title-container">
+        <h1 class="site-title">Fantasy Stocks</h1>
+    </div>
     <nav class="site-nav">
         <ul class="site-nav-list">
             <li><a href="index.html">Home</a></li>
             <li><a href="profile.php">Profile</a></li>
             <li><a href="leagues.php">League</a></li>
             <li><a href="stocks.php">Stocks</a></li>
-             <li><a href="about.php">About</a></li>
-
+            <li><a href="about.php">About</a></li>
         </ul>
     </nav>
 </header>
@@ -61,9 +85,7 @@ while ($row = $stocksResult->fetch_assoc()) {
 <h2 class="welcome-title">Welcome, <?php echo htmlspecialchars($user['username']); ?>!</h2>
 
 <div class="profile-section">
-
     <div class="profile-img aya-image"></div>
-
     <div class="stats-row">
 
         <div class="stat-box">
@@ -85,7 +107,7 @@ while ($row = $stocksResult->fetch_assoc()) {
             <input type="file" name="fileToUpload" require>
             <input type="submit" value="Upload Image">
         </form>
-        
+
         <div class="stat-box">
             <div class="stat-title">Your Stocks</div>
             <div class="stat-value">
@@ -100,6 +122,38 @@ while ($row = $stocksResult->fetch_assoc()) {
         </div>
 
     </div>
+</div>
+
+<div class="stocks-container">
+    <form action="#" method="POST" class="stock-picker-form">
+        <ul class="stocks-list">
+            <?php
+            $sql = "SELECT h.ticker, h.st_name, s.sectorName, h.start_price 
+                    FROM Holdings h
+                    JOIN Sector s ON h.index = s.index";
+            $result = $connection->query($sql);
+
+            if ($result && $result->num_rows > 0) {
+                while($row = $result->fetch_assoc()) {
+                    $ticker = htmlspecialchars($row['ticker']);
+                    $name = htmlspecialchars($row['st_name']);
+                    $sector = htmlspecialchars($row['sectorName']);
+                    $price = number_format($row['start_price'], 2);
+
+                    echo '<li class="stock-item">';
+                    echo '<label>';
+                    echo '<input type="checkbox" name="stocks[]" value="'. $ticker .'"> ';
+                    echo $ticker . ' – ' . $name . ' (' . $sector . ') – $' . $price;
+                    echo '</label>';
+                    echo '</li>';
+                }
+            } else {
+                echo '<p>No stocks found</p>';
+            }
+            ?>
+        </ul>
+        <button type="submit" class="save-stocks-btn">Save My Stock List</button>
+    </form>
 </div>
 
 <a class="logout-btn" href="/web_src/classes/Login/Logout.php">Logout</a>
