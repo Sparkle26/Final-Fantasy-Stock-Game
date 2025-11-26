@@ -17,6 +17,21 @@ $stmt->bind_param("i", $users_id);
 $stmt->execute();
 $result = $stmt->get_result();
 $user = $result->fetch_assoc();
+
+/*Stock info */
+
+$stmt = $connection->prepare("SELECT us.ticker, u.username
+from users_stocks us JOIN users u ON (us.usersID=u.usersID)
+where u.usersID = ?");
+$stmt->bind_param("i", $users_id);
+$stmt->execute();
+$stocksResult = $stmt->get_result();
+
+$userStocks = [];
+while ($row = $stocksResult->fetch_assoc()) {
+    $userStocks[] = $row['ticker'];
+}
+
 ?>
 
 <!DOCTYPE html>
@@ -70,6 +85,19 @@ $user = $result->fetch_assoc();
             <input type="file" name="fileToUpload" require>
             <input type="submit" value="Upload Image">
         </form>
+        
+        <div class="stat-box">
+            <div class="stat-title">Your Stocks</div>
+            <div class="stat-value">
+                <?php
+                    if (empty($userStocks)) {
+                        echo "No stocks yet";
+                    } else {
+                        echo implode(", ", array_map('htmlspecialchars', $userStocks));
+                    }
+                ?>
+            </div>
+        </div>
 
     </div>
 </div>
