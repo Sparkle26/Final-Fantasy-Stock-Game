@@ -49,9 +49,9 @@ require_once "../data_src/api/includes/db_connect.php";
         <div class="card-wrapper">
 
             <div class="card"
-                style="--image: url('/web_src/Images/_ (1).jpeg'); 
+                style="--image: url('/web_src/Images/IMG_4458.jpeg'); 
                        --angle: -15deg; --x: 190px; --y: 90px;
-                       --caption: 'Photo of us working';">
+                       --caption: 'Brainstorming how the matchups will work in the SQL database.';">
             </div>
 
             <div class="card"
@@ -61,9 +61,9 @@ require_once "../data_src/api/includes/db_connect.php";
             </div>
 
             <div class="card"
-                style="--image: url('/web_src/Images/170803.jpg'); 
+                style="--image: url('/web_src/Images/IMG_4459.jpeg'); 
                        --angle: -10deg; --x: -40px; --y: 120px;
-                       --caption: 'Our poster';">
+                       --caption: 'Work Day (Donut Day #1)';">
             </div>
 
             <div class="card"
