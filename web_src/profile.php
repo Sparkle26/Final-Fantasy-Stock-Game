@@ -10,15 +10,12 @@ if (!isset($_SESSION['users_id'])) {
     header("Location: /web_src/classes/Login/Login.php");
     exit();
 }
-/* User Info */
 $users_id = $_SESSION['users_id'];
 $stmt = $connection->prepare("SELECT username, wins, losses FROM users WHERE usersID = ?");
 $stmt->bind_param("i", $users_id);
 $stmt->execute();
 $result = $stmt->get_result();
 $user = $result->fetch_assoc();
-
-/*Stock info */
 
 $stmt = $connection->prepare("SELECT us.ticker, u.username
 from users_stocks us JOIN users u ON (us.usersID=u.usersID)
@@ -32,15 +29,12 @@ while ($row = $stocksResult->fetch_assoc()) {
     $userStocks[] = $row['ticker'];
 }
 
-/* Handle Save My Stock List submission */
 if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['stocks'])) {
 
-    // Clear existing stocks (optional depending on your design)
     $del = $connection->prepare("DELETE FROM users_stocks WHERE usersID = ?");
     $del->bind_param("i", $users_id);
     $del->execute();
 
-    // Insert selected stocks
     $ins = $connection->prepare("INSERT INTO users_stocks (usersID, ticker) VALUES (?, ?)");
 
     foreach ($_POST['stocks'] as $ticker) {
@@ -48,7 +42,6 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['stocks'])) {
         $ins->execute();
     }
 
-    // Refresh page so updated list shows immediately
     header("Location: profile.php");
     exit();
 }
@@ -86,31 +79,30 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['stocks'])) {
 
 <div class="profile-section">
     <div class="profile-img aya-image"></div>
-    <div class="stats-row">
+    
+    <div class="stats-wrapper">
+        <div class="stats-group">
 
-        <div class="stat-box">
-            <div class="win-stat-title">Wins</div>
-            <div class="stat-value"><?php echo $user['wins']; ?></div>
+            <div class="stat-box">
+                <div class="win-stat-title">Wins</div>
+                <div class="stat-value"><?php echo $user['wins']; ?></div>
+            </div>
+
+            <div class="stat-box">
+                <div class="loss-stat-title">Losses</div>
+                <div class="stat-value"><?php echo $user['losses']; ?></div>
+            </div>
+
+            <div class="stat-box">
+                <div class="streak-title">Streak</div>
+                <div class="stat-value">0</div>
+            </div>
+
         </div>
 
-        <div class="stat-box">
-            <div class="loss-stat-title">Losses</div>
-            <div class="stat-value"><?php echo $user['losses']; ?></div>
-        </div>
-
-        <div class="stat-box">
-            <div class="stat-title">Streak</div>
-            <div class="stat-value">0</div>
-        </div>
-
-        <form action="classes/uploadImage.php"  method="POST" enctype="multipart/form-data">
-            <input type="file" name="fileToUpload" require>
-            <input type="submit" value="Upload Image">
-        </form>
-
-        <div class="stat-box">
-            <div class="stat-title">Your Stocks</div>
-            <div class="stat-value">
+        <div class="stocks">
+            <div class="stocks-title">Your Stocks</div>
+            <div class="stocks-value">
                 <?php
                     if (empty($userStocks)) {
                         echo "No stocks yet";
@@ -120,9 +112,15 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['stocks'])) {
                 ?>
             </div>
         </div>
-
     </div>
+
 </div>
+
+<form action="classes/uploadImage.php" method="POST" enctype="multipart/form-data" class="upload-form">
+    <label for="fileToUpload" class="upload-btn">Upload Image</label>
+    <input type="file" name="fileToUpload" id="fileToUpload" accept="image/*" onchange="this.form.submit()">
+</form>
+
 
 <div class="stocks-container">
     <form action="#" method="POST" class="stock-picker-form">

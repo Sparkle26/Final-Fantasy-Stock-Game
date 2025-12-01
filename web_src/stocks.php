@@ -32,7 +32,7 @@ session_start();
 <body>
     <h1>Stocks in the NASDAQ 100 available to Players</h1>
     
-    <div class="stocks-container">
+    <div class="stocks-list-container">
         <div class="stocks-table-wrapper">
             <table class="stocks-table">
                 <thead>
