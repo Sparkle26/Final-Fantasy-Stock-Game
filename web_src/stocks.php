@@ -40,7 +40,7 @@ session_start();
                         <th>Ticker</th>
                         <th>Name</th>
                         <th>Sector</th>
-                        <th>Start Price of this Week</th>
+                        <th>Current Price of the Stocks</th>
                     </tr>
                 </thead>
                 <tbody>
@@ -58,7 +58,7 @@ session_start();
                             echo "<td>" . htmlspecialchars($row['ticker']) . "</td>";
                             echo "<td>" . htmlspecialchars($row['st_name']) . "</td>";
                             echo "<td>" . htmlspecialchars($row['sectorName']) . "</td>";
-                            echo "<td>$" . number_format($row['start_price'], 2) . "</td>";
+                            echo "<td>$" . number_format($row['curr_price'], 2) . "</td>";
                             echo "</tr>";
                         }
                     } else {
