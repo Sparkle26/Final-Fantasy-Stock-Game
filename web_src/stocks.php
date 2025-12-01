@@ -46,7 +46,7 @@ session_start();
                 <tbody>
                     <?php
                     // Query to get all stocks
-                    $sql = "SELECT h.ticker, h.st_name, s.sectorName, h.start_price 
+                    $sql = "SELECT h.ticker, h.st_name, s.sectorName, h.curr_price 
                             FROM Holdings h
                             JOIN Sector s ON h.index = s.index";
                     $result = $connection->query($sql);

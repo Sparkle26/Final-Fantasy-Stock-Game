@@ -25,7 +25,7 @@ for (ticker,) in tickers:
             continue
 
         cursor.execute(
-            "UPDATE Holdings SET start_price = %s WHERE ticker = %s",
+            "UPDATE Holdings SET curr_price = %s WHERE ticker = %s",
             (price, ticker)
         )
         print(f"[OK] Updated {ticker}: {price}")
