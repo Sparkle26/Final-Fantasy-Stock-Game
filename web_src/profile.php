@@ -10,6 +10,8 @@ if (!isset($_SESSION['users_id'])) {
     header("Location: /web_src/classes/Login/Login.php");
     exit();
 }
+
+/* User Info */
 $users_id = $_SESSION['users_id'];
 $stmt = $connection->prepare("SELECT username, wins, losses FROM users WHERE usersID = ?");
 $stmt->bind_param("i", $users_id);
@@ -17,6 +19,7 @@ $stmt->execute();
 $result = $stmt->get_result();
 $user = $result->fetch_assoc();
 
+/*Stock info */
 $stmt = $connection->prepare("SELECT us.ticker, u.username
 from users_stocks us JOIN users u ON (us.usersID=u.usersID)
 where u.usersID = ?");
@@ -29,12 +32,15 @@ while ($row = $stocksResult->fetch_assoc()) {
     $userStocks[] = $row['ticker'];
 }
 
+/* Handle Save My Stock List submission */
 if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['stocks'])) {
 
+// Clear existing stocks (optional depending on your design)
     $del = $connection->prepare("DELETE FROM users_stocks WHERE usersID = ?");
     $del->bind_param("i", $users_id);
     $del->execute();
 
+// Insert selected stocks
     $ins = $connection->prepare("INSERT INTO users_stocks (usersID, ticker) VALUES (?, ?)");
 
     foreach ($_POST['stocks'] as $ticker) {
@@ -42,6 +48,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['stocks'])) {
         $ins->execute();
     }
 
+    // Refresh page so updated list shows immediately
     header("Location: profile.php");
     exit();
 }
