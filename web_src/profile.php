@@ -78,6 +78,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['stocks'])) {
             <li><a href="leagues.php">League</a></li>
             <li><a href="stocks.php">Stocks</a></li>
             <li><a href="about.php">About</a></li>
+            <li><a href="matchup.php">Matchup</a></li>
         </ul>
     </nav>
 </header>
