@@ -55,13 +55,24 @@ $user_holdings = $stmt->get_result()->fetch_all(MYSQLI_ASSOC);
 $stmt->close();
 
 // ------------------------------
-// Fetch opponent holdings and username
+// Fetch opponent's username
+// ------------------------------
+$sql_opponent_name = "SELECT username FROM users WHERE usersID = ?";
+$stmt = $connection->prepare($sql_opponent_name);
+$stmt->bind_param("i", $opponentID);
+$stmt->execute();
+$result = $stmt->get_result();
+$opponentRow = $result->fetch_assoc();
+$opponentName = $opponentRow['username'] ?? 'Opponent';
+$stmt->close();
+
+// ------------------------------
+// Fetch opponent holdings
 // ------------------------------
 $sql_opponent_holdings = "
-    SELECT u.username, h.ticker, h.start_price, h.curr_price
+    SELECT h.ticker, h.start_price, h.curr_price
     FROM users_stocks us
     JOIN Holdings h ON us.ticker = h.ticker
-    JOIN users u ON u.usersID = us.usersID
     WHERE us.usersID = ?
 ";
 $stmt = $connection->prepare($sql_opponent_holdings);
@@ -69,7 +80,6 @@ $stmt->bind_param("i", $opponentID);
 $stmt->execute();
 $opponent_holdings = $stmt->get_result()->fetch_all(MYSQLI_ASSOC);
 $stmt->close();
-$opponentName = $opponent_holdings[0]['username'] ?? 'Opponent';
 ?>
 
 <!DOCTYPE html>
