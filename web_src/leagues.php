@@ -14,10 +14,6 @@ if (!isset($_SESSION['users_id'])) {
 }
 
 $loggedInUserID = $_SESSION['users_id'];
-
-// ------------------------------
-// Get leagueID (from GET or session) — default to 1
-// ------------------------------
 $leagueID = isset($_GET['leagueID']) ? intval($_GET['leagueID']) : 1;
 
 // ------------------------------
@@ -46,104 +42,88 @@ if (empty($leaderboard)) {
 }
 
 // ------------------------------
-// Build list of users for bracket generation
+// Step 1: Check DB for Round 1 matchups
 // ------------------------------
-$users = $leaderboard; // same array structure
-
-// ------------------------------
-// Step 1: Shuffle users
-// ------------------------------
-shuffle($users);
-
-// ------------------------------
-// Step 2: Generate Round 1 matches dynamically
-// ------------------------------
-$round1_matches = [];
-$numUsers = count($users);
-
-for ($i = 0; $i < $numUsers; $i += 2) {
-    $user1 = $users[$i];
-    $user2 = ($i + 1 < $numUsers) ? $users[$i + 1] : null; // Only add BYE if unmatched
-    $round1_matches[] = ['user_1' => $user1, 'user_2' => $user2];
-}
-
-$bracket = [];
-$bracket[1] = $round1_matches;
-
-// ------------------------------
-// Step 3: Auto-advance BYE winners for later rounds
-// ------------------------------
-$totalRounds = ceil(log(max(1, count($round1_matches) * 2), 2));
-
-for ($r = 2; $r <= $totalRounds; $r++) {
-    $prevRound = $bracket[$r - 1];
-    $rnd = [];
-
-    for ($i = 0; $i < count($prevRound); $i += 2) {
-        $u1 = null;
-        $u2 = null;
-
-        // Pick first available winner from previous round
-        if (isset($prevRound[$i]['user_1']) && $prevRound[$i]['user_2'] === null) {
-            $u1 = $prevRound[$i]['user_1']; // BYE winner auto-advance
-        } else if (isset($prevRound[$i]['user_1']) && isset($prevRound[$i]['user_2'])) {
-            $u1 = null; // actual match, winner TBD
-        }
-
-        // Same for next match
-        if (isset($prevRound[$i + 1]['user_1']) && $prevRound[$i + 1]['user_2'] === null) {
-            $u2 = $prevRound[$i + 1]['user_1']; // BYE winner auto-advance
-        } else if (isset($prevRound[$i + 1]['user_1']) && isset($prevRound[$i + 1]['user_2'])) {
-            $u2 = null; // actual match, winner TBD
-        }
-
-        $rnd[] = ['user_1' => $u1, 'user_2' => $u2];
-    }
-
-    $bracket[$r] = $rnd;
-}
-
-
-// ------------------------------
-// Step 4: Insert Round 1 Matchups into DB if not inserted
-// ------------------------------
-
-// Check if Round 1 already exists
-$chk = $connection->prepare("
-    SELECT COUNT(*) 
-    FROM Matchups 
+$sql_check_round1 = "
+    SELECT user_1_id, user_2_id
+    FROM Matchups
     WHERE leagueID = ? AND round = 1
-");
-$chk->bind_param("i", $leagueID);
-$chk->execute();
-$chk->bind_result($existingCount);
-$chk->fetch();
-$chk->close();
+    ORDER BY MatchupID ASC
+";
+$stmt = $connection->prepare($sql_check_round1);
+$stmt->bind_param("i", $leagueID);
+$stmt->execute();
+$round1_result = $stmt->get_result();
+$round1_matches = $round1_result->fetch_all(MYSQLI_ASSOC);
+$stmt->close();
 
-if ($existingCount == 0) {
+// ------------------------------
+// Step 2: If no Round 1 matchups in DB, generate and insert
+// ------------------------------
+if (empty($round1_matches)) {
+    $users = $leaderboard;
+    shuffle($users);
 
     $insert = $connection->prepare("
         INSERT INTO Matchups 
         (Week_num, leagueID, user_1_id, user_2_id, winner, loser, round)
         VALUES (?, ?, ?, ?, NULL, NULL, 1)
     ");
-
     $week = 1;
+    $round1_matches = [];
 
-    foreach ($round1_matches as $match) {
-        $u1 = $match['user_1'] ? $match['user_1']['usersID'] : null;
-        $u2 = $match['user_2'] ? $match['user_2']['usersID'] : null;
-
-        // Skip inserting if both users are null (no matchup)
-        if ($u1 === null && $u2 === null) {
-            continue;
-        }
+    for ($i = 0; $i < count($users); $i += 2) {
+        $u1 = $users[$i]['usersID'];
+        $u2 = ($i + 1 < count($users)) ? $users[$i + 1]['usersID'] : null;
 
         $insert->bind_param("iiii", $week, $leagueID, $u1, $u2);
         $insert->execute();
+
+        $round1_matches[] = ['user_1_id' => $u1, 'user_2_id' => $u2];
     }
 
     $insert->close();
+}
+
+// ------------------------------
+// Step 3: Prepare bracket for display
+// ------------------------------
+
+// Load full user info for each Round 1 matchup
+foreach ($round1_matches as &$m) {
+    $u1 = $m['user_1_id'];
+    $u2 = $m['user_2_id'];
+
+    $m['user_1'] = null;
+    $m['user_2'] = null;
+
+    foreach ($leaderboard as $u) {
+        if ($u['usersID'] == $u1) $m['user_1'] = $u;
+        if ($u['usersID'] == $u2) $m['user_2'] = $u;
+    }
+}
+unset($m);
+
+// Build bracket array
+$bracket = [];
+$bracket[1] = $round1_matches;
+
+// Compute total rounds
+$totalRounds = ceil(log(max(1, count($round1_matches) * 2), 2));
+
+// Auto-advance BYE winners
+for ($r = 2; $r <= $totalRounds; $r++) {
+    $prevRound = $bracket[$r - 1];
+    $rnd = [];
+
+    for ($i = 0; $i < count($prevRound); $i += 2) {
+        $u1 = isset($prevRound[$i]['user_1']) && $prevRound[$i]['user_2'] === null ? $prevRound[$i]['user_1'] : null;
+        $u2 = isset($prevRound[$i + 1]['user_1']) && $prevRound[$i + 1]['user_2'] === null ? $prevRound[$i + 1]['user_1'] : null;
+
+        $rnd[] = ['user_1' => $u1, 'user_2' => $u2];
+    }
+
+    $bracket[$r] = $rnd;
 }
 ?>
 <!DOCTYPE html>
@@ -153,43 +133,17 @@ if ($existingCount == 0) {
     <title>League Standings & Bracket</title>
     <link rel="stylesheet" href="stylesheets/league.css">
     <link rel="stylesheet" href="stylesheets/matchups.css">
-
     <style>
-        /* NEW LAYOUT */
-        .league-wrapper {
-            display: flex;
-            justify-content: center;
-            gap: 40px;
-            width: 100%;
-            margin-top: 120px;
-            padding: 20px;
-        }
-
-        .standings-container {
-            width: 40%;
-        }
-
-        .bracket-side {
-            width: 50%;
-        }
-
-        table.standings {
-            width: 100%;
-            font-size: 18px;
-        }
-
-        .round {
-            margin-top: 20px;
-        }
+        .league-wrapper { display: flex; justify-content: center; gap: 40px; width: 100%; margin-top: 120px; padding: 20px; }
+        .standings-container { width: 40%; }
+        .bracket-side { width: 50%; }
+        table.standings { width: 100%; font-size: 18px; }
+        .round { margin-top: 20px; }
     </style>
 </head>
-
 <body>
-
 <header class="site-header">
-    <div class="site-title-container">
-        <h1 class="site-title">Fantasy Stocks</h1>
-    </div>
+    <div class="site-title-container"><h1 class="site-title">Fantasy Stocks</h1></div>
     <nav class="site-nav">
         <ul class="site-nav-list">
             <li><a href="index.html">Home</a></li>
@@ -204,7 +158,6 @@ if ($existingCount == 0) {
 <h1 class="page-title">League Standings & Bracket</h1>
 
 <div class="league-wrapper">
-
     <!-- LEFT SIDE: LEADERBOARD -->
     <div class="standings-container">
         <h2>League Standings</h2>
@@ -214,7 +167,6 @@ if ($existingCount == 0) {
                 <th>Wins</th>
                 <th>Losses</th>
             </tr>
-
             <?php foreach ($leaderboard as $u): ?>
                 <tr>
                     <td><?php echo htmlspecialchars($u['username']); ?></td>
@@ -228,31 +180,21 @@ if ($existingCount == 0) {
     <!-- RIGHT SIDE: BRACKET -->
     <div class="bracket-side">
         <h2>Playoff Bracket</h2>
-
         <div class="bracket-container">
             <?php foreach ($bracket as $roundNum => $matches): ?>
                 <div class="round">
                     <h3>Round <?php echo $roundNum; ?></h3>
-
                     <?php foreach ($matches as $match): ?>
                         <div class="match">
-                            <div class="player">
-                                <?php echo $match['user_1'] ? htmlspecialchars($match['user_1']['username']) : "BYE"; ?>
-                            </div>
+                            <div class="player"><?php echo $match['user_1'] ? htmlspecialchars($match['user_1']['username']) : "BYE"; ?></div>
                             <div class="vs">vs</div>
-                            <div class="player">
-                                <?php echo $match['user_2'] ? htmlspecialchars($match['user_2']['username']) : "BYE"; ?>
-                            </div>
+                            <div class="player"><?php echo $match['user_2'] ? htmlspecialchars($match['user_2']['username']) : "BYE"; ?></div>
                         </div>
                     <?php endforeach; ?>
-
                 </div>
             <?php endforeach; ?>
         </div>
-
     </div>
-
 </div>
-
 </body>
 </html>

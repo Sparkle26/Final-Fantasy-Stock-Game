@@ -177,8 +177,6 @@ $opponentName = $opponent_holdings[0]['username'] ?? 'Opponent';
             <li><a href="profile.php">Profile</a></li>
             <li><a href="leagues.php">League</a></li>
             <li><a href="stocks.php">Stocks</a></li>
-            <li><a href="about.php">About</a></li>
-            <li><a href="matchup.php">Matchup</a></li>
         </ul>
     </nav>
 </header>
