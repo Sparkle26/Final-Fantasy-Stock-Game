@@ -177,6 +177,8 @@ $opponentName = $opponent_holdings[0]['username'] ?? 'Opponent';
             <li><a href="profile.php">Profile</a></li>
             <li><a href="leagues.php">League</a></li>
             <li><a href="stocks.php">Stocks</a></li>
+            <li><a href="about.php">About</a></li>
+            <li><a href="matchup.php">Matchup</a></li>
         </ul>
     </nav>
 </header>
@@ -184,52 +186,64 @@ $opponentName = $opponent_holdings[0]['username'] ?? 'Opponent';
 <h1>Current Matchup</h1>
 
 <div class="matchup-wrapper">
+<!-- LEFT: Logged-in user -->
+<?php 
+$user_total_percent = 0;
+foreach ($user_holdings as $h) {
+    $user_total_percent += (($h['curr_price'] - $h['start_price']) / $h['start_price']) * 100;
+}
+?>
+<div class="holdings-container user-side">
+    <h2>Your Holdings — <?php echo number_format($user_total_percent, 2); ?>%</h2>
+    <table class="holdings-table">
+        <tr>
+            <th>Ticker</th>
+            <th>Start Price</th>
+            <th>Current Price</th>
+            <th>% Change</th>
+        </tr>
+        <?php foreach ($user_holdings as $h): 
+            $percent = (($h['curr_price'] - $h['start_price']) / $h['start_price']) * 100;
+        ?>
+        <tr>
+            <td><?php echo htmlspecialchars($h['ticker']); ?></td>
+            <td><?php echo number_format($h['start_price'], 2); ?></td>
+            <td><?php echo number_format($h['curr_price'], 2); ?></td>
+            <td><?php echo number_format($percent, 2); ?>%</td>
+        </tr>
+        <?php endforeach; ?>
+    </table>
+</div>
 
-    <!-- LEFT: Logged-in user -->
-    <div class="holdings-container user-side">
-        <h2>Your Holdings</h2>
-        <table class="holdings-table">
-            <tr>
-                <th>Ticker</th>
-                <th>Start Price</th>
-                <th>Current Price</th>
-                <th>% Change</th>
-            </tr>
-            <?php foreach ($user_holdings as $h): 
-                $percent = (($h['curr_price'] - $h['start_price']) / $h['start_price']) * 100;
-            ?>
-            <tr>
-                <td><?php echo htmlspecialchars($h['ticker']); ?></td>
-                <td><?php echo number_format($h['start_price'], 2); ?></td>
-                <td><?php echo number_format($h['curr_price'], 2); ?></td>
-                <td><?php echo number_format($percent, 2); ?>%</td>
-            </tr>
-            <?php endforeach; ?>
-        </table>
-    </div>
+<!-- RIGHT: Opponent -->
+<?php 
+$opponent_total_percent = 0;
+foreach ($opponent_holdings as $h) {
+    $opponent_total_percent += (($h['curr_price'] - $h['start_price']) / $h['start_price']) * 100;
+}
+?>
+<div class="holdings-container opponent-side">
+    <h2><?php echo htmlspecialchars($opponentName); ?>'s Holdings — <?php echo number_format($opponent_total_percent, 2); ?>%</h2>
+    <table class="holdings-table">
+        <tr>
+            <th>Ticker</th>
+            <th>Start Price</th>
+            <th>Current Price</th>
+            <th>% Change</th>
+        </tr>
+        <?php foreach ($opponent_holdings as $h): 
+            $percent = (($h['curr_price'] - $h['start_price']) / $h['start_price']) * 100;
+        ?>
+        <tr>
+            <td><?php echo htmlspecialchars($h['ticker']); ?></td>
+            <td><?php echo number_format($h['start_price'], 2); ?></td>
+            <td><?php echo number_format($h['curr_price'], 2); ?></td>
+            <td><?php echo number_format($percent, 2); ?>%</td>
+        </tr>
+        <?php endforeach; ?>
+    </table>
+</div>
 
-    <!-- RIGHT: Opponent -->
-    <div class="holdings-container opponent-side">
-        <h2><?php echo htmlspecialchars($opponentName); ?>'s Holdings</h2>
-        <table class="holdings-table">
-            <tr>
-                <th>Ticker</th>
-                <th>Start Price</th>
-                <th>Current Price</th>
-                <th>% Change</th>
-            </tr>
-            <?php foreach ($opponent_holdings as $h): 
-                $percent = (($h['curr_price'] - $h['start_price']) / $h['start_price']) * 100;
-            ?>
-            <tr>
-                <td><?php echo htmlspecialchars($h['ticker']); ?></td>
-                <td><?php echo number_format($h['start_price'], 2); ?></td>
-                <td><?php echo number_format($h['curr_price'], 2); ?></td>
-                <td><?php echo number_format($percent, 2); ?>%</td>
-            </tr>
-            <?php endforeach; ?>
-        </table>
-    </div>
 
 </div>
 
