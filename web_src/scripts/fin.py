@@ -2,8 +2,9 @@ import sys
 import os
 
 # Add the project root directory to Python path
-ROOT = os.path.dirname(os.path.dirname(__file__))
+ROOT = os.path.dirname(os.path.dirname(os.path.dirname(__file__)))  # go up 3 levels to root
 sys.path.append(ROOT)
+
 
 from data_src.api.includes.db_connect import get_connection
 import yfinance as yf
