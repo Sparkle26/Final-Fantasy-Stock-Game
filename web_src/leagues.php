@@ -14,7 +14,25 @@ if (!isset($_SESSION['users_id'])) {
 }
 
 $loggedInUserID = $_SESSION['users_id'];
-$leagueID = isset($_GET['leagueID']) ? intval($_GET['leagueID']) : 1;
+
+// ------------------------------
+// Determine leagueID
+// ------------------------------
+$leagueID = isset($_GET['leagueID']) ? intval($_GET['leagueID']) : 0;
+
+if (!$leagueID) {
+    // Get the user's league if not provided
+    $stmt = $connection->prepare("SELECT leagueID FROM users WHERE usersID = ?");
+    $stmt->bind_param("i", $loggedInUserID);
+    $stmt->execute();
+    $stmt->bind_result($leagueID);
+    $stmt->fetch();
+    $stmt->close();
+
+    if (!$leagueID) {
+        die("No league found for your user.");
+    }
+}
 
 // ------------------------------
 // Fetch users in league for leaderboard
@@ -42,14 +60,15 @@ if (empty($leaderboard)) {
 }
 
 // ------------------------------
-// Step 1: Check DB for Round 1 matchups
+// Load Round 1 matchups
 // ------------------------------
 $sql_check_round1 = "
-    SELECT user_1_id, user_2_id
+    SELECT matchupID, user_1_id, user_2_id, winner, loser
     FROM Matchups
     WHERE leagueID = ? AND round = 1
-    ORDER BY MatchupID ASC
+    ORDER BY matchupID ASC
 ";
+
 $stmt = $connection->prepare($sql_check_round1);
 $stmt->bind_param("i", $leagueID);
 $stmt->execute();
@@ -58,15 +77,14 @@ $round1_matches = $round1_result->fetch_all(MYSQLI_ASSOC);
 $stmt->close();
 
 // ------------------------------
-// Step 2: If no Round 1 matchups in DB, generate and insert
+// Generate Round 1 if none
 // ------------------------------
 if (empty($round1_matches)) {
     $users = $leaderboard;
     shuffle($users);
 
     $insert = $connection->prepare("
-        INSERT INTO Matchups 
-        (Week_num, leagueID, user_1_id, user_2_id, winner, loser, round)
+        INSERT INTO Matchups (Week_num, leagueID, user_1_id, user_2_id, winner, loser, round)
         VALUES (?, ?, ?, ?, NULL, NULL, 1)
     ");
     $week = 1;
@@ -79,52 +97,77 @@ if (empty($round1_matches)) {
         $insert->bind_param("iiii", $week, $leagueID, $u1, $u2);
         $insert->execute();
 
-        $round1_matches[] = ['user_1_id' => $u1, 'user_2_id' => $u2];
+        $round1_matches[] = [
+            'matchupID' => $insert->insert_id,
+            'user_1_id' => $u1,
+            'user_2_id' => $u2,
+            'winner' => null,
+            'loser' => null
+        ];
     }
 
     $insert->close();
 }
 
 // ------------------------------
-// Step 3: Prepare bracket for display
+// Load all rounds from database
 // ------------------------------
-
-// Load full user info for each Round 1 matchup
-foreach ($round1_matches as &$m) {
-    $u1 = $m['user_1_id'];
-    $u2 = $m['user_2_id'];
-
-    $m['user_1'] = null;
-    $m['user_2'] = null;
-
-    foreach ($leaderboard as $u) {
-        if ($u['usersID'] == $u1) $m['user_1'] = $u;
-        if ($u['usersID'] == $u2) $m['user_2'] = $u;
-    }
-}
-unset($m);
-
-// Build bracket array
 $bracket = [];
-$bracket[1] = $round1_matches;
+$maxRoundStmt = $connection->prepare("
+    SELECT MAX(round) FROM Matchups WHERE leagueID = ?
+");
+$maxRoundStmt->bind_param("i", $leagueID);
+$maxRoundStmt->execute();
+$maxRoundStmt->bind_result($totalRounds);
+$maxRoundStmt->fetch();
+$maxRoundStmt->close();
 
-// Compute total rounds
-$totalRounds = ceil(log(max(1, count($round1_matches) * 2), 2));
+// Fetch matchups for each round
+for ($r = 1; $r <= $totalRounds; $r++) {
+    $stmt = $connection->prepare("
+        SELECT matchupID, user_1_id, user_2_id, winner, loser
+        FROM Matchups
+        WHERE leagueID = ? AND round = ?
+        ORDER BY matchupID ASC
+    ");
+    $stmt->bind_param("ii", $leagueID, $r);
+    $stmt->execute();
+    $result = $stmt->get_result();
+    $roundMatches = $result->fetch_all(MYSQLI_ASSOC);
+    $stmt->close();
 
-// Auto-advance BYE winners
-for ($r = 2; $r <= $totalRounds; $r++) {
-    $prevRound = $bracket[$r - 1];
-    $rnd = [];
+    // Attach full user info
+    foreach ($roundMatches as &$match) {
+        $match['user_1'] = null;
+        $match['user_2'] = null;
 
-    for ($i = 0; $i < count($prevRound); $i += 2) {
-        $u1 = isset($prevRound[$i]['user_1']) && $prevRound[$i]['user_2'] === null ? $prevRound[$i]['user_1'] : null;
-        $u2 = isset($prevRound[$i + 1]['user_1']) && $prevRound[$i + 1]['user_2'] === null ? $prevRound[$i + 1]['user_1'] : null;
-
-        $rnd[] = ['user_1' => $u1, 'user_2' => $u2];
+        foreach ($leaderboard as $u) {
+            if ($u['usersID'] == $match['user_1_id']) $match['user_1'] = $u;
+            if ($u['usersID'] == $match['user_2_id']) $match['user_2'] = $u;
+        }
     }
+    unset($match);
 
-    $bracket[$r] = $rnd;
+    $bracket[$r] = $roundMatches;
 }
+
+
+// ------------------------------
+// Load full user info
+// ------------------------------
+foreach ($bracket as $roundNum => &$matches) {
+    foreach ($matches as &$match) {
+        $match['user_1'] = null;
+        $match['user_2'] = null;
+
+        foreach ($leaderboard as $u) {
+            if ($u['usersID'] == $match['user_1_id']) $match['user_1'] = $u;
+            if ($u['usersID'] == $match['user_2_id']) $match['user_2'] = $u;
+        }
+    }
+}
+unset($match);
+unset($matches);
 ?>
 <!DOCTYPE html>
 <html>
@@ -139,6 +182,9 @@ for ($r = 2; $r <= $totalRounds; $r++) {
         .bracket-side { width: 50%; }
         table.standings { width: 100%; font-size: 18px; }
         .round { margin-top: 20px; }
+        .match { display: flex; justify-content: space-between; margin-bottom: 8px; }
+        .player { width: 45%; text-align: center; }
+        .vs { width: 10%; text-align: center; }
     </style>
 </head>
 <body>
