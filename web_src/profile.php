@@ -195,8 +195,6 @@ if ($userLeague === null) {
         <table class="league-table">
             <tr>
                 <th>League Name</th>
-                <th>Description</th>
-                <th>Action</th>
             </tr>
 
             <?php foreach ($availableLeagues as $lg): ?>
