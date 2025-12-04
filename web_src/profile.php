@@ -52,6 +52,29 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['stocks'])) {
     header("Location: profile.php");
     exit();
 }
+/* Check if user is currently in a league */
+$stmt = $connection->prepare("SELECT leagueID FROM users WHERE usersID = ?");
+$stmt->bind_param("i", $users_id);
+$stmt->execute();
+$inLeagueRes = $stmt->get_result();
+$inLeagueRow = $inLeagueRes->fetch_assoc();
+$userLeague = $inLeagueRow['leagueID'];
+/* Fetch all leagues if user is NOT in one */
+$availableLeagues = [];
+if ($userLeague === null) {
+
+    // Pull ALL leagues
+    $sql = "SELECT leagueID, leagueName FROM League";
+    $res = $connection->query($sql);
+    if (!$res) {
+    die("League query failed: " . $connection->error);
+}
+
+    while ($row = $res->fetch_assoc()) {
+        $availableLeagues[] = $row;
+    }
+}
+
 
 
 ?>
@@ -161,6 +184,42 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['stocks'])) {
         <button type="submit" class="save-stocks-btn">Save My Stock List</button>
     </form>
 </div>
+
+<?php if ($userLeague === null): ?>
+<div class="league-browser">
+    <h2 class="league-browser-title">Join a League</h2>
+
+    <?php if (empty($availableLeagues)): ?>
+        <p>No active leagues available right now.</p>
+    <?php else: ?>
+        <table class="league-table">
+            <tr>
+                <th>League Name</th>
+                <th>Description</th>
+                <th>Action</th>
+            </tr>
+
+            <?php foreach ($availableLeagues as $lg): ?>
+                <tr>
+                    <td><?php echo htmlspecialchars($lg['leagueName']); ?></td>
+                    
+                    <td>
+                        <form method="POST">
+                            <button type="submit"
+                                    name="join_league"
+                                    value="<?php echo $lg['leagueID']; ?>"
+                                    class="join-btn">
+                                Join
+                            </button>
+                        </form>
+                    </td>
+                </tr>
+            <?php endforeach; ?>
+        </table>
+    <?php endif; ?>
+</div>
+<?php endif; ?>
+
 
 <a class="logout-btn" href="/web_src/classes/Login/Logout.php">Logout</a>
 
