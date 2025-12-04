@@ -90,8 +90,8 @@ for($r=2; $r<=$numRounds; $r++){
 <head> 
   <meta charset="UTF-8" />
   <link rel="stylesheet" href="stylesheets/styles.css" />
-  <link rel="stylesheet" href="stylesheets/matchups.css" />
-  <title>Stocks!</title>
+  <link rel="stylesheet" href="stylesheets/matchup.css" />
+  <title>Matchup!</title>
 </head>
 
 <main>

@@ -79,13 +79,18 @@ body {
   flex-direction: row;
   gap: 25px;
   font-size: 25px;
-  font-family: 'Plus Jakarta Sans', sans-serif;
 }
 
 .stat-box {
   display: flex;
   flex-direction: column;
   align-items: center;
+}
+
+.stocks {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
 }
 
 .win-stat-title {
@@ -117,14 +122,30 @@ body {
 }
 
 .stocks-title {
-    background: #D9D9D9;
-    padding: 4px 10px;
+    background: #d3d3d3;
     border-radius: 6px;
+    padding: 10px 14px;
     font-size: 14px;
     font-weight: 700;
-    color: #000;
+    color: #2b2b2b;
     text-align: left;
     width: fit-content;
+    display: inline-block;
+    box-shadow: 0 2px 6px rgba(0,0,0,0.06);
+}
+
+.stocks-list {
+  max-height: 160px; /* shorten visible list */
+  overflow-y: auto;
+  padding: 10px;
+  border: 1px solid #e6e6e6;
+  border-radius: 12px;
+  background-color: #fff;
+  list-style: none;
+  margin: 0;
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
 }
 
 .stat-value,
@@ -188,13 +209,18 @@ body {
 }
 
 .stocks-container {
-  width: 100%;
-  max-width: 600px;
-  margin-top: 40px;
+  /* left column: take remaining width beside the right-side live chart */
+  width: calc(100% - 760px);
+  min-width: 300px;
+  max-width: none;
+  margin-top: 20px;
   margin-left: 65px;
+  margin-right: 20px;
   display: flex;
   flex-direction: column;
   gap: 10px;
+  float: left;
+  box-sizing: border-box;
 }
 
 .stocks-list {
@@ -248,4 +274,57 @@ body {
 
 .save-stocks-btn:hover {
   background-color: #2b8ab4;
+}
+
+.live-chart-container {
+  width: 680px;
+  min-width: 480px;
+  margin-top: -500px; 
+  margin-right: 65px;
+  float: right; 
+  background-color: #fff;
+  padding: 20px;
+  border-radius: 12px;
+  box-shadow: 0 6px 18px rgba(0,0,0,0.06);
+  display: flex;
+  flex-direction: column;
+  height: 420px; 
+}
+
+.live-chart-container h3 {
+  font-size: 18px;
+  font-weight: 600;
+  margin-bottom: 10px;
+}
+
+.live-chart-container canvas {
+  width: 100%;
+  flex: 1; /* stretch to fill the container height */
+  height: auto;
+  max-height: none;
+}
+
+.stocks-list::-webkit-scrollbar {
+  width: 6px;
+}
+
+.stocks-list::-webkit-scrollbar-thumb {
+  background-color: #3DB5E6;
+  border-radius: 3px;
+}
+
+.stocks-list::-webkit-scrollbar-track {
+  background: #f0f0f0;
+}
+
+@media screen and (max-width: 1200px) {
+  .live-chart-container {
+    margin-left: 0;
+    margin-top: 20px;
+    float: none;
+    width: 100%;
+    min-width: unset;
+    height: 320px;
+  }
+  .stocks-container { width: 100%; float: none; margin-left: 20px; margin-right:20px }
 }
