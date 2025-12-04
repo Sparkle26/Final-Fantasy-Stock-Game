@@ -10,7 +10,7 @@ require_once "../data_src/api/includes/db_connect.php";
 // Ensure user logged in
 // ------------------------------
 if (!isset($_SESSION['users_id'])) {
-    die("You must be logged in to view this page.");
+    die("You must be logged in to view this page. Womp Womp");
 }
 
 $loggedInUserID = $_SESSION['users_id'];
@@ -30,7 +30,7 @@ if (!$leagueID) {
     $stmt->close();
 
     if (!$leagueID) {
-        die("No league found for your user.");
+        die("No league found for your user. Please visit your Profile page to select a League.");
     }
 }
 
@@ -49,7 +49,7 @@ $stmt->fetch();
 $stmt->close();
 
 if (!$currentRound) {
-    die("No matchup found for you in this league.");
+    die("No matchup found for you in this league. Please visit the League page to see all current matchups");
 }
 
 // ------------------------------
