@@ -33,6 +33,31 @@ if (!$leagueID) {
         die("No league found for your user.");
     }
 }
+// ------------------------------
+// Helper function to calculate total % change for a user
+// ------------------------------
+function getTotalPercentChange($connection, $userID) {
+    if (!$userID) return 0; // handle BYE
+
+    $sql = "
+        SELECT h.start_price, h.curr_price
+        FROM users_stocks us
+        JOIN Holdings h ON us.ticker = h.ticker
+        WHERE us.usersID = ?
+    ";
+    $stmt = $connection->prepare($sql);
+    $stmt->bind_param("i", $userID);
+    $stmt->execute();
+    $holdings = $stmt->get_result()->fetch_all(MYSQLI_ASSOC);
+    $stmt->close();
+
+    $total = 0;
+    foreach ($holdings as $h) {
+        $total += (($h['curr_price'] - $h['start_price']) / $h['start_price']) * 100;
+    }
+    return $total;
+}
+
 
 // ------------------------------
 // Fetch users in league for leaderboard
@@ -63,7 +88,7 @@ if (empty($leaderboard)) {
 // Load Round 1 matchups
 // ------------------------------
 $sql_check_round1 = "
-    SELECT matchupID, user_1_id, user_2_id, winner, loser
+    SELECT matchupID, user_1_id, user_2_id, winner, loser, winner_change, loser_change
     FROM Matchups
     WHERE leagueID = ? AND round = 1
     ORDER BY matchupID ASC
@@ -125,7 +150,7 @@ $maxRoundStmt->close();
 // Fetch matchups for each round
 for ($r = 1; $r <= $totalRounds; $r++) {
     $stmt = $connection->prepare("
-        SELECT matchupID, user_1_id, user_2_id, winner, loser
+        SELECT matchupID, user_1_id, user_2_id, winner, loser, winner_change, loser_change
         FROM Matchups
         WHERE leagueID = ? AND round = ?
         ORDER BY matchupID ASC
@@ -232,9 +257,40 @@ unset($matches);
                     <h3>Round <?php echo $roundNum; ?></h3>
                     <?php foreach ($matches as $match): ?>
                         <div class="match">
-                            <div class="player"><?php echo $match['user_1'] ? htmlspecialchars($match['user_1']['username']) : "BYE"; ?></div>
-                            <div class="vs">vs</div>
-                            <div class="player"><?php echo $match['user_2'] ? htmlspecialchars($match['user_2']['username']) : "BYE"; ?></div>
+                    <?php
+                    // Get %Change for each user
+                    
+                    // Get %Change for each user safely
+                    $user1Percent = isset($match['winner_change'], $match['loser_change']) 
+                        ? ($match['winner'] == $match['user_1_id'] ? $match['winner_change'] : $match['loser_change']) 
+                        : 0;
+
+                    $user2Percent = isset($match['winner_change'], $match['loser_change']) 
+                        ? ($match['winner'] == $match['user_2_id'] ? $match['winner_change'] : $match['loser_change']) 
+                        : 0;
+                    
+
+
+                    // Determine display strings
+                    $user1Display = $match['user_1'] ? htmlspecialchars($match['user_1']['username']) : "BYE";
+                    $user2Display = $match['user_2'] ? htmlspecialchars($match['user_2']['username']) : "BYE";
+
+                    if ($match['winner'] == $match['user_1_id']) {
+                        $user1Display = "**{$user1Display}** ~ " . number_format($user1Percent, 2) . "%";
+                        $user2Display = "{$user2Display} ~ " . number_format($user2Percent, 2) . "%";
+                    } else if ($match['winner'] == $match['user_2_id']) {
+                        $user1Display = "{$user1Display} ~ " . number_format($user1Percent, 2) . "%";
+                        $user2Display = "**{$user2Display}** ~ " . number_format($user2Percent, 2) . "%";
+                    } else { 
+                        // matchup not resolved yet
+                        $user1Display = "{$user1Display} ~ " . number_format($user1Percent, 2) . "%";
+                        $user2Display = "{$user2Display} ~ " . number_format($user2Percent, 2) . "%";
+                    }
+                    ?>
+                    <div class="player"><?php echo $user1Display; ?></div>
+                    <div class="vs">vs</div>
+                    <div class="player"><?php echo $user2Display; ?></div>
+
                         </div>
                     <?php endforeach; ?>
                 </div>

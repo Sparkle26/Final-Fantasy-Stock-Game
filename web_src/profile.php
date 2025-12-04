@@ -74,6 +74,20 @@ if ($userLeague === null) {
         $availableLeagues[] = $row;
     }
 }
+/* Handle Join League */
+if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['join_league'])) {
+
+    $leagueID = intval($_POST['join_league']);
+
+    // Update user's league column
+    $stmt = $connection->prepare("UPDATE users SET leagueID = ? WHERE usersID = ?");
+    $stmt->bind_param("ii", $leagueID, $users_id);
+    $stmt->execute();
+
+    // Redirect to refresh the page with the new state
+    header("Location: profile.php");
+    exit();
+}
 
 
 

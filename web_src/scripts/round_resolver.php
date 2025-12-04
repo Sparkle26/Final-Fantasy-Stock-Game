@@ -90,14 +90,28 @@ foreach ($matchups as $match) {
             $total2 += (($h['curr_price'] - $h['start_price']) / $h['start_price']) * 100;
         }
 
+        // Store computed % changes
+        $user1_change = $total1;
+        $user2_change = $total2;
+
+
         // Determine winner/loser
+// Determine winner/loser AND % change values
         if ($total1 >= $total2) {
             $winner = $user1_id;
             $loser = $user2_id;
+
+            $winner_change = $user1_change;
+            $loser_change  = $user2_change;
+
         } else {
             $winner = $user2_id;
             $loser = $user1_id;
+
+            $winner_change = $user2_change;
+            $loser_change  = $user1_change;
         }
+
 
         // Update users table with wins/losses
         if ($winner) {
@@ -126,10 +140,11 @@ foreach ($matchups as $match) {
     // Update this matchup with winner + loser
     $stmt = $connection->prepare("
         UPDATE Matchups
-        SET winner = ?, loser = ?
+        SET winner = ?, loser = ?, winner_change = ?, loser_change = ?
         WHERE matchupID = ?
     ");
-    $stmt->bind_param("iii", $winner, $loser, $match['matchupID']);
+    $stmt->bind_param("iddii", $winner, $loser, $winner_change, $loser_change, $match['matchupID']);
+
     $stmt->execute();
     $stmt->close();
 
