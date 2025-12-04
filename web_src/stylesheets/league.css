@@ -6,13 +6,17 @@
     box-sizing: border-box;
 }
 
-html, body {
-    min-height: 100%;
+/* Body text */
+body {
+    min-height: 100vh;
     background-color: #FEFEFE;
+    display: flex;
+    flex-direction: column;
+    font-family: 'Kanit', sans-serif;
     color: #333;
-    font-family: 'Plus Jakarta Sans', sans-serif;
 }
 
+/* Header */
 header {
     display: flex;
     justify-content: space-between;
@@ -25,12 +29,7 @@ header {
     z-index: 10;
 }
 
-h1, h2, h3 {
-    color: #333;
-    font-family: 'Plus Jakarta Sans', sans-serif;
-}
-
-/* Nav */
+/* Navigation */
 .site-nav ul {
     list-style: none;
     display: flex;
@@ -48,6 +47,7 @@ h1, h2, h3 {
     color: #3DB5E6;
 }
 
+/* Fixed bottom bar */
 .bottom-bar {
     position: fixed;
     bottom: 0;
@@ -58,6 +58,41 @@ h1, h2, h3 {
     z-index: 10;
 }
 
+/* --- Titles --- */
+
+/* Main page title */
+h1 {
+    font-family: 'Plus Jakarta Sans', sans-serif;
+    font-weight: 800;
+    font-size: 26px;
+    line-height: 1.2;
+    color: #2b2b2b;
+    text-align: center;
+    margin-bottom: 30px;
+}
+
+/* Section title (e.g., League Standings, Bracket) */
+h2 {
+    font-family: 'Plus Jakarta Sans', sans-serif;
+    font-weight: 600;
+    font-size: 26px;
+    line-height: 1.3;
+    color: #333;
+    margin-bottom: 20px;
+    text-align: center;
+}
+
+/* Subsection title (smaller headers, e.g., rounds or stats) */
+h3 {
+    font-family: 'Plus Jakarta Sans', sans-serif;
+    font-weight: 600;
+    font-size: 26px;
+    line-height: 1.3;
+    color: #555;
+    margin-bottom: 15px;
+    text-align: center;
+}
+
 /* --- Combined Layout: Leaderboard (left) + Bracket (right) --- */
 .league-wrapper {
     display: flex;
@@ -66,8 +101,6 @@ h1, h2, h3 {
     width: 95%;
     margin: 40px auto 120px auto;
     gap: 40px;
-    font-family: 'Plus Jakarta Sans', sans-serif;
-    color: #333;
 }
 
 /* Left side — Leaderboard */
@@ -76,7 +109,6 @@ h1, h2, h3 {
     max-width: 45%;
 }
 
-/* Add a title above the leaderboard */
 .standings-container h2 {
     font-size: 26px;
     font-weight: 600;
@@ -85,7 +117,7 @@ h1, h2, h3 {
     color: #333;
 }
 
-/* Make leaderboard table modern */
+/* Leaderboard table */
 table.standings {
     width: 100%;
     border-radius: 8px;
@@ -117,7 +149,7 @@ table.standings td {
     gap: 24px;
 }
 
-/* Make bracket rounds visually aligned */
+/* Bracket rounds */
 .round {
     background: #fff;
     padding: 16px;
@@ -135,24 +167,19 @@ table.standings td {
     padding: 12px 18px;
     border-radius: 6px;
     background: #fafafa;
-    margin-bottom: 12px;
-    font-family: 'Plus Jakarta Sans', sans-serif;
 }
 
-/* VS text centered */
 .match .vs {
     margin: 0 12px;
     font-weight: 600;
     color: #555;
 }
 
-/* Player name theme */
 .player {
     font-weight: 600;
     color: #333;
 }
 
-/* Optional hover effect for matches */
 .match:hover {
     background: #f0f8ff;
     border-color: #c0c0c0;

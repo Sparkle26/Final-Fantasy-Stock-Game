@@ -150,7 +150,9 @@ if ($opponentID) {
 <head>
     <meta charset="UTF-8">
     <title>Matchup Holdings</title>
-    <link rel="stylesheet" href="stylesheets/matchups.css">
+    <link rel="stylesheet" href="stylesheets/styles.css" />
+    <link rel="stylesheet" href="stylesheets/matchup.css" />
+  
     <style>
         .matchup-wrapper {
             display: flex;

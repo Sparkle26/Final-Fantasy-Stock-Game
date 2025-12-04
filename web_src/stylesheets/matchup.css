@@ -1,3 +1,5 @@
+@import url('https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@300;400;500;600;700;800&display=swap');
+
 .bracket-container {
     display: flex;
     flex-direction: column;
@@ -21,6 +23,8 @@
 .round h2 {
     text-align: center;
     margin-bottom: 15px;
+    margin-top: -10px;
+    margin-left: -1px;
     font-size: 22px;
     color: #2b2b2b;
 }
@@ -54,7 +58,7 @@
 
 .page-title {
     text-align: center;
-    margin-top: 140px;
+    margin-top: -100px;
     margin-bottom: 40px;
     font-size: 28px;
     color: #2b2b2b;
