@@ -1,0 +1,124 @@
+@import url('https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;600&display=swap');
+
+body {
+  background-color: #fefefe;
+  font-family: 'Plus Jakarta Sans', sans-serif;
+  margin: 0;
+  padding: 0;
+  display: flex;
+  flex-direction: column;
+  min-height: 100vh;
+}
+
+/* Header */
+.site-header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  height: 80px;
+  padding: 0 24px;
+  background-color: #fff;
+  border-bottom: 1px solid #e6e6e6;
+}
+
+.site-title {
+  font-size: 24px;
+  font-weight: 600;
+}
+
+.site-nav ul {
+  list-style: none;
+  display: flex;
+  gap: 12px;
+  margin: 0;
+  padding: 0;
+}
+
+.site-nav ul li a {
+  color: #000;
+  text-decoration: none;
+  padding: 8px 12px;
+  transition: color 0.3s ease;
+}
+
+.site-nav ul li a:hover {
+  color: #3DB5E6;
+}
+
+/* Register section */
+#register {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  padding: 40px 20px;
+}
+
+#welcome-text {
+  font-size: 32px;
+  font-weight: 600;
+  margin-bottom: 20px;
+}
+
+#basicContainer {
+  background: #fff;
+  padding: 30px 40px;
+  border-radius: 8px;
+  box-shadow: 0 4px 12px rgba(0,0,0,0.1);
+  text-align: center;
+  width: 100%;
+  max-width: 400px;
+}
+
+#basicContainer p {
+  margin: 10px 0;
+}
+
+/* Form inputs */
+form input[type="text"],
+form input[type="password"] {
+  width: 100%;
+  padding: 10px;
+  margin: 8px 0;
+  border: 1px solid #ccc;
+  border-radius: 4px;
+  font-family: inherit;
+  font-size: 14px;
+}
+
+/* Submit button */
+.submit-button {
+  width: 100%;
+  padding: 10px;
+  margin-top: 12px;
+  border: none;
+  border-radius: 4px;
+  background: #497447;
+  color: #fff;
+  font-size: 15px;
+  cursor: pointer;
+  transition: background 0.3s ease;
+}
+
+.submit-button:hover {
+  background: #5db9ff;
+}
+
+/* Back to login link */
+a.nav-link {
+  display: inline-block;
+  margin-top: 16px;
+  padding: 8px 14px;
+  border-radius: 4px;
+  background: #FF9F20;
+  color: #fff;
+  font-size: 14px;
+  width: 100px;
+  text-decoration: none;
+  transition: background 0.3s ease;
+}
+
+a.nav-link:hover {
+  background: #497447;
+}

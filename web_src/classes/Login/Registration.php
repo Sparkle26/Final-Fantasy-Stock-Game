@@ -14,13 +14,15 @@ session_start();
     <li><a href="../../index.html">Home</a></li>
     <li><a href="../../profile.php">Profile</a></li>
     <li><a href="../../leagues.php">League</a></li>
-    <li><a href="../../about.php">About</a></li>
     <li><a href="../../stocks.php">Stocks</a></li>
+     <li><a href="../../about.php">About</a></li>
   </ul>
 </header>
 <head>
     <title>Register</title>
     <link rel="stylesheet" href="../../stylesheets/styles.css">
+     <link rel="stylesheet" href="../../stylesheets/registration.css">
+
 </head>
 
 <body>
