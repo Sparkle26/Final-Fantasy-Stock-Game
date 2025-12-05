@@ -10,7 +10,7 @@ require_once "../data_src/api/includes/db_connect.php";
 // Ensure user logged in
 // ------------------------------
 if (!isset($_SESSION['users_id'])) {
-    die("You must be logged in to view this page.");
+    header("Location: /web_src/classes/Login/Login.php");
 }
 
 $loggedInUserID = $_SESSION['users_id'];
@@ -220,8 +220,8 @@ unset($matches);
             <li><a href="index.html">Home</a></li>
             <li><a href="profile.php">Profile</a></li>
             <li><a href="leagues.php">League</a></li>
-            <li><a href="about.php">About</a></li>
             <li><a href="stocks.php">Stocks</a></li>
+            <li><a href="about.php">About</a></li>
         </ul>
     </nav>
 </header>
