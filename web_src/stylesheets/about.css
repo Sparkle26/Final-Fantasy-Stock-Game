@@ -1,148 +1,198 @@
-@import url('https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;600&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@300;400;500;600;700;800&display=swap');
+@import url('https://fonts.googleapis.com/css?family=Kanit');
 
-body {
-  background-color: #fefefe;
-  font-family: 'Plus Jakarta Sans', sans-serif;
-  margin: 0;
-  padding: 0;
-  display: flex;
-  flex-direction: column;
-  min-height: 100vh;
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
 }
 
-.site-header {
-  display: flex;
-  align-items: center;
-  justify-content: space-between;
-  height: 100px;
-  padding: 0 16px;
-  background-color: #fff;
-  border-bottom: 1px solid #e6e6e6;
+.body {
+    min-height: 100vh;
+    background-color: #FEFEFE;
+    display: flex;
+    flex-direction: column;
+    font-family: 'Kanit', sans-serif;
 }
 
-.site-title {
-  font-size: 28px;
-  margin-left: 50px;
-  font-weight: 1000;
+.header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    height: 70px;
+    padding: 0 24px;
+    border-bottom: 1px solid rgba(0,0,0,.1);
+    background: #fff;
 }
 
 .site-nav ul {
-  list-style: none;
-  display: flex;
-  gap: 8px;
-  margin: 0;
-  padding: 0;
+    list-style: none;
+    display: flex;
+    gap: 8px;
 }
 
 .site-nav ul li a {
-  color: #000;
-  padding: 14px 16px;
-  text-decoration: none;
-  font-weight: 500;
+    padding: 14px 16px;
+    text-decoration: none;
+    color: #000;
+    font-weight: 500;
 }
 
 .site-nav ul li a:hover {
-  color: #3DB5E6;
+    color: #3DB5E6;
 }
 
-#login {
-  flex: 1;
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  justify-content: center;
-  padding: 40px 20px;
-  margin-bottom: 150px;
+.about-layout {
+    display: flex;
+    justify-content: space-between;
+    align-items: flex-start;
+    gap: 40px;
+    padding: 20px 0 0 29px;
+    position: relative;
 }
 
-#welcome-text {
-  font-size: 60px;
-  font-weight: 800;
-  margin-bottom: 20px;
-  position: relative;
+.about-left {
+    flex: 1;
+    max-width: 500px;
+    margin-left: 38px;
 }
 
-#welcome-text::after {
-  content: "";
-  position: absolute;
-  left: 50%;
-  bottom: -8px;
-  transform: translateX(-50%);
-  width: 0;
-  height: 4px;
-  background: #FF9F20;
-  animation: underlineSlide 2s forwards;
+.about-left h2 {
+    font-size: 50px;
+    color: #1E1E1E;
+    margin-bottom: 20px;
+    margin-top: 70px; 
 }
 
-@keyframes underlineSlide {
-  to { width: 100%; }
+.about-left p {
+    margin-top: 15px; 
+    margin-left: 0px;
+    font-family: "Plus Jakarta Sans", sans-serif;
+    font-size: 18px;
+    font-weight: 500;
+    color: #1E1E1E;
+    line-height: 1.25;
 }
 
-#basicContainer {
-  background: #fff;
-  padding: 30px 40px;
-  border-radius: 8px;
-  box-shadow: 0 4px 12px rgba(0,0,0,0.1);
-  text-align: center;
-  width: 100%;
-  max-width: 400px;
+.about-right {
+    flex: 1;
+    display: flex;
+    justify-content: flex-end;
+    position: relative;
 }
 
-#basicContainer p {
-  margin: 10px 0;
+.card-wrapper {
+    width: 600px;
+    height: 100px;
+    position: absolute;
+    right: 0;
+    top: 100px; 
 }
 
-form input[type="text"],
-form input[type="password"] {
-  width: 100%;
-  padding: 10px;
-  margin: 8px 0;
-  border: 1px solid #ccc;
-  border-radius: 4px;
-  font-size: 14px;
+.card {
+    position: absolute;
+    width: 260px;
+    height: 320px;
+    background: white;
+    border-radius: 4px;
+    padding: 12px;
+    box-shadow: 0 8px 18px rgba(0,0,0,0.25);
+    transform: rotate(var(--angle)) translate(var(--x), var(--y));
+    transition: transform .35s ease-out, z-index .2s;
 }
 
-.submit-button {
-  width: 100%;
-  padding: 10px;
-  margin-top: 12px;
-  border: none;
-  border-radius: 4px;
-  background: #497447;
-  color: #fff;
-  font-size: 15px;
-  cursor: pointer;
-  transition: background 0.3s ease;
+.card:hover {
+    transform: scale(1.1) rotate(0deg);
+    z-index: 20;
 }
 
-.submit-button:hover {
-  background: #5db9ff;
+.card:before {
+    content: "";
+    display: block;
+    width: 100%;
+    height: 80%;
+    background: var(--image) center/cover no-repeat;
+    border-radius: 3px;
 }
 
-a.nav-link {
-  display: inline-block;
-  margin-top: 12px;
-  padding: 8px 14px;
-  border-radius: 4px;
-  background: #FF9F20;
-  color: #fff;
-  font-size: 14px;
-  width: 100px;
-  text-decoration: none;
-  transition: background 0.3s ease;
+.card:after {
+    content: var(--caption);
+    display: block;
+    text-align: center;
+    margin-top: 10px;
+    font-size: 15px;
+    color: #555;
+    font-family: "Plus Jakarta Sans", sans-serif;
 }
 
-a.nav-link:hover {
-  background: #497447;
+.hr {
+    width: 100%;
+    height: 2px;
+    background-color: gray;
+    margin: 200px auto 10px auto;
 }
 
-/* Bottom bar */
-.bottom-bar {
-  position: fixed;
-  bottom: 0;
-  left: 0;
-  width: 100%;
-  height: 67px;
-  background-color: #587200;
-  z-index: 10;
+.about-team,
+h3 {
+    font-size: 50px;
+    text-align: center;
+    margin-top: 70px;
+    color: #1E1E1E;
+    margin-bottom: 100px;
+}
+
+.team-container {
+    display: flex;
+    justify-content: center;
+    gap: 100px;
+    margin-top: 80px;
+}
+
+.team-member {
+    text-align: center;
+    font-family: "Plus Jakarta Sans", sans-serif;
+}
+
+.team-member .profile-img {
+    width: 300px;
+    height: 300px;
+    border-radius: 50%;
+    background-size: cover;
+    background-position: center;
+    background-repeat: no-repeat;
+    margin-bottom: 15px;
+}
+
+.aya-image { background-image: url('../Images/aya-photo.jpeg'); }
+.ryder-image { background-image: url('../Images/ryder-photo.jpeg'); }
+.paul-image { background-image: url('../Images/paul-photo.jpeg'); }
+
+.team-member a {
+    display: block;
+    margin-top: 10px;
+    font-size: 22px;
+    font-weight: 600;
+    text-decoration: none;
+    color: #1e1e1e;
+}
+
+.team-member a:hover {
+    color: #3DB5E6;
+}
+
+.team-member .team-bio {
+    margin-top: 5px;
+    font-size: 16px;
+    font-weight: 400;
+    color: #555;
+    line-height: 1.3;
+    max-width: 280px;
+    margin-left: auto;
+    margin-right: auto;
+}
+
+.footer,
+bottom-footer {
+    font-size: 5px;
+    margin-top: -50px;
 }
