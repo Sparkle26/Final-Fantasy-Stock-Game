@@ -92,6 +92,7 @@ body {
   margin: 10px 0;
 }
 
+
 form input[type="text"],
 form input[type="password"] {
   width: 100%;
@@ -99,6 +100,7 @@ form input[type="password"] {
   margin: 8px 0;
   border: 1px solid #ccc;
   border-radius: 4px;
+  font-family: inherit;
   font-size: 14px;
 }
 

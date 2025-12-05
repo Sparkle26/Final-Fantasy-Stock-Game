@@ -58,7 +58,7 @@
             <input type="submit" value="Register" class="submit-button">
         </form>
 
-        <a class="nav-link" href="Login.php">Back to Login</a>
+        <a class="nav-link" href="/web_src/index.html">Back to Login</a>
     </div>
     
   <div class="bottom-bar"></div>

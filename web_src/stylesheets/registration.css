@@ -23,7 +23,6 @@ body {
 .site-title {
   font-size: 28px;
   margin-left: 50px;
-  font-family: 'Plus Jakarta Sans', sans-serif;
   font-weight: 1000;
 }
 
@@ -39,7 +38,6 @@ body {
   color: #000;
   padding: 14px 16px;
   text-decoration: none;
-  font-family: 'Plus Jakarta Sans', sans-serif;
   font-weight: 500;
 }
 
@@ -47,12 +45,12 @@ body {
   color: #3DB5E6;
 }
 
-#register {
+#login {
   flex: 1;
   display: flex;
   flex-direction: column;
   align-items: center;
-  justify-content: center;
+  justify-content: center;   /* centers vertically */
   padding: 40px 20px;
   margin-bottom: 150px;
 }
@@ -92,6 +90,19 @@ body {
 
 #basicContainer p {
   margin: 10px 0;
+}
+
+/* feedback messages */
+.message-error {
+  color: red;
+  font-weight: bold;
+  margin-bottom: 10px;
+}
+
+.message-success {
+  color: green;
+  font-weight: bold;
+  margin-bottom: 10px;
 }
 
 form input[type="text"],

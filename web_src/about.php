@@ -35,7 +35,7 @@ require_once "../data_src/api/includes/db_connect.php";
         <p>
             Welcome to the Fantasy Stock Game — a project built by a group of students 
             passionate about combining finance, competition, and web development.
-            Our goal is to bring the excitement of fantasy sports into the&nbsp;<br>world of investing.
+            Our goal is to <br> bring the excitement of fantasy sports into the <br> world of investing.
         </p>
 
         <p>
