@@ -2,45 +2,45 @@
 <html lang="en">
 <head>
   <meta charset="UTF-8" />
-  <link rel="stylesheet" href="stylesheets/styles.css" />
   <title>Fantasy Stocks</title>
-  </style>
+  <link rel="stylesheet" href="stylesheets/styles.css" />
+  <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
 </head>
 
 <body>
-<header class="site-header">
-  <h1 class="site-title">Fantasy Stocks</h1>
-  <nav class="site-nav">
-    <ul>
-      <li><a href="index.html">Home</a></li>
-      <li><a href="profile.php">Profile</a></li>
-      <li><a href="leagues.php">League</a></li>
-      <li><a href="stocks.php">Stocks</a></li>
-      <li><a href="about.php">About</a></li>
-    </ul>
-  </nav>
-</header>
+  <header class="site-header">
+    <h1 class="site-title">Fantasy Stocks</h1>
+    <nav class="site-nav">
+      <ul>
+        <li><a href="index.html">Home</a></li>
+        <li><a href="profile.php">Profile</a></li>
+        <li><a href="leagues.php">League</a></li>
+        <li><a href="stocks.php">Stocks</a></li>
+        <li><a href="about.php">About</a></li>
+      </ul>
+    </nav>
+  </header>
 
-<main class="main-content">
-  <div class="left-content">
-    <h2>Welcome!</h2>
-    <p>Ready to Play?!</p>
+  <main class="main-content">
+    <div class="left-content">
+      <h2>Welcome!</h2>
+      <p>Ready to Play?!</p>
 
-    <form action="/data_src/api/Login/login_jawn.php" method="post">
-      <input type="text" id="username" name="username" placeholder="Username" required><br>
-      <input type="password" id="password" name="password" placeholder="Password" required><br>
-      <input type="submit" value="Submit" class="submit-button">
-    </form>
+      <form action="/data_src/api/Login/login_jawn.php" method="post">
+        <input type="text" id="username" name="username" placeholder="Username" required><br>
+        <input type="password" id="password" name="password" placeholder="Password" required><br>
+        <input type="submit" value="Submit" class="submit-button">
+      </form>
 
-    <a class="nav-link" href="/web_src/classes/Login/Registration.php">
-      Register
-    </a>
-  </div>
+      <a class="nav-link" href="/web_src/classes/Login/Registration.php">Register</a>
+    </div>
 
-  <img class="homeScreenImage" src="/web_src/Images/StockPhoto.png" alt="Home Screen Image">
+    <div class="image-container">
+      <img class="homeScreenImage" src="/web_src/Images/StockPhoto.png" alt="Home Screen Image">
+      <img class="overlay-image" src="/web_src/Images/white-ver.png" alt="Fantasy Stocks Overlay">
+    </div>
 
-  <div class="bottom-bar"></div>
-</main>
-
+    <div class="bottom-bar"></div>
+  </main>
 </body>
 </html>
