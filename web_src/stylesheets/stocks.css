@@ -1,49 +1,43 @@
 @import url('https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@300;400;500;600;700;800&display=swap');
 
-/* Stocks Table Container */
 .stocks-list-container {
     max-width: 900px;
     margin: 40px auto;
     padding: 0 16px;
 }
-.stocks-list-container h1,
-body > h1 {
+
+.page-heading {
+    background-color: #FF9F20;
+    color: #fff;
     text-align: center;
-    font-size: 32px; 
-    margin-top: 50px;
-    margin-bottom: 40px;
-    color: #2b2b2b;
-}
+    font-size: 32px;
+    font-weight: 700;
+    padding: 16px 24px;
+    margin: 40px auto;
+    max-width: 800px;
+    border-radius: 8px;
+    box-shadow: 0 5px 12px rgba(0, 0, 0, 0.1)}
 
 .stocks-table-wrapper {
-    max-height: 600px; 
+    max-height: 600px;
     overflow-y: auto;
     border: 1px solid #e6e6e6;
     box-shadow: 0 2px 8px rgba(0,0,0,0.05);
 }
 
-/* Keep the table full width inside wrapper */
-.stocks-table {
-    width: 100%;
-    border-collapse: collapse;
-}
-
-/* Optional: fix table header so it stays on top while scrolling */
-.stocks-table thead {
-    position: sticky;
-    top: 0;
-    background-color: #f2f2f2;
-    z-index: 1;
-}
-
-
-/* Stocks Table */
 .stocks-table {
     width: 100%;
     border-collapse: collapse;
     font-family: 'Plus Jakarta Sans', system-ui, -apple-system, 'Segoe UI', Roboto, 'Helvetica Neue', Arial, sans-serif;
     background-color: #fff;
     box-shadow: 0 2px 8px rgba(0,0,0,0.05);
+}
+
+.stocks-table thead {
+    position: sticky;
+    top: 0;
+    background-color: #f2f2f2;
+    z-index: 1;
 }
 
 .stocks-table th,
@@ -68,7 +62,6 @@ body > h1 {
     background-color: #e6f7ff;
 }
 
-/* Controls (search + per-page) */
 .stocks-controls {
     display: flex;
     justify-content: space-between;
@@ -105,7 +98,6 @@ body > h1 {
     background: #fff;
 }
 
-/* Pagination buttons */
 .pagination {
     padding: 12px 16px;
     display: flex;
@@ -139,13 +131,12 @@ body > h1 {
 }
 
 .pagination button.active {
-    background: linear-gradient(180deg,#3DB5E6,#2b8ab4);
+    background: linear-gradient(180deg,#3DB5E6,#3DB5E6);
     color: white;
     border-color: transparent;
     box-shadow: 0 6px 18px rgba(45,133,180,0.18);
 }
 
-/* Make buttons and controls responsive on small screens */
 @media screen and (max-width: 600px) {
     .stocks-controls { flex-direction: column; align-items: stretch; }
     #stockSearch { width: 100%; }
@@ -153,10 +144,19 @@ body > h1 {
     .pagination button { padding: 8px 10px; }
 }
 
-/* Optional: Responsive */
 @media screen and (max-width: 768px) {
     .stocks-table th, .stocks-table td {
         padding: 8px 10px;
         font-size: 14px;
     }
+}
+
+.bottom-bar {
+  position: relative;
+  bottom: 0;
+  left: 0;
+  width: 100%;
+  height: 67px;
+  background-color: #587200;
+  z-index: 10;
 }
