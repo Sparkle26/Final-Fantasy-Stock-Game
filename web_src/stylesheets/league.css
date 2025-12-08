@@ -62,9 +62,33 @@ body {
 h1 {
     font-family: 'Plus Jakarta Sans', sans-serif;
     font-weight: 800;
-    font-size: 26px;
+    font-size: 42px;
     color: #2b2b2b;
-    text-align: center;
+    text-align: left;
+    margin-left: 65px;
+}
+
+/* Uunderline for Leagues title */
+#leagues-title {
+    position: relative;
+    display: inline-block;
+}
+
+#leagues-title::after {
+    content: "";
+    position: absolute;
+    left: 50%;
+    bottom: -8px;
+    transform: translateX(-50%);
+    width: 0;
+    height: 4px;
+    background: #FF9F20;
+    animation: underlineSlide 2s forwards;
+}
+
+@keyframes underlineSlide {
+    from { width: 0; }
+    to { width: 100%; }
 }
 
 /* Section title (e.g., League Standings, Bracket) */
@@ -89,20 +113,53 @@ h3 {
     text-align: center;
 }
 
-/* --- Combined Layout: Leaderboard (left) + Bracket (right) --- */
 .league-wrapper {
     display: flex;
-    justify-content: space-between;
-    align-items: flex-start;
-    width: 95%;
-    margin: 40px auto 120px auto;
+    justify-content: center;
     gap: 40px;
+    width: 100%;
+    /* margin-top: 120px; */
+    padding: 20px;
+}
+
+.standings-container {
+    width: 40%;
+}
+
+.bracket-side {
+    width: 50%;
+}
+
+table.standings {
+    width: 100%;
+    font-size: 18px;
+}
+
+.round {
+    margin-top: 20px;
+}
+
+.match {
+    display: flex;
+    justify-content: space-between;
+    margin-bottom: 8px;
+}
+
+.player {
+    width: 45%;
+    text-align: center;
+}
+
+.vs {
+    width: 10%;
+    text-align: center;
 }
 
 /* Left side — Leaderboard */
 .standings-container {
     flex: 1;
     max-width: 45%;
+    margin-left: 38px;
 }
 
 .standings-container h2 {

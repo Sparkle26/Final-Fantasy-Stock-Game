@@ -93,7 +93,7 @@ require_once "../data_src/api/includes/db_connect.php";
         <div class="team-member">
             <div class="profile-img ryder-image"></div>
             <a href="https://www.linkedin.com/in/rpaulus1326/">Ryder</a>
-            <p class="team-bio">Hi! I'm a Junior International Business and Information Systems major with concentrations in Data Analytics<br> and Management.
+            <p class="team-bio">Hi! I'm Ryder! I'm a Junior International Business and Information Systems major with concentrations in Data Analytics and Management.
                                 I focus on implementing features such as the login system, database integration, and data scraping to make our projects functional and efficient.
                                 I'm excited to apply my skills in real-world applications. Connect with me on LinkedIn!.</p>
         </div>

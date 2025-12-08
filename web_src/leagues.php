@@ -201,16 +201,6 @@ unset($matches);
     <title>League Standings & Bracket</title>
     <link rel="stylesheet" href="stylesheets/league.css">
     <link rel="stylesheet" href="stylesheets/matchups.css">
-    <style>
-        .league-wrapper { display: flex; justify-content: center; gap: 40px; width: 100%; margin-top: 120px; padding: 20px; }
-        .standings-container { width: 40%; }
-        .bracket-side { width: 50%; }
-        table.standings { width: 100%; font-size: 18px; }
-        .round { margin-top: 20px; }
-        .match { display: flex; justify-content: space-between; margin-bottom: 8px; }
-        .player { width: 45%; text-align: center; }
-        .vs { width: 10%; text-align: center; }
-    </style>
 </head>
 <body>
 <header class="site-header">
@@ -221,13 +211,13 @@ unset($matches);
             <li><a href="profile.php">Profile</a></li>
             <li><a href="leagues.php">League</a></li>
             <li><a href="matchup.php">Matchup</a></li>
-             <li><a href="stocks.php">Stocks</a></li>
+            <li><a href="stocks.php">Stocks</a></li>
             <li><a href="about.php">About</a></li>
         </ul>
     </nav>
 </header>
 
-<h1 class="page-title">League Standings & Bracket</h1>
+<h1 id="leagues-title" class="page-title">League Standings & Bracket</h1>
 
 <div class="league-wrapper">
     <!-- LEFT SIDE: LEADERBOARD -->
