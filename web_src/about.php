@@ -106,11 +106,13 @@ require_once "../data_src/api/includes/db_connect.php";
                                 to bring functionality and real-world data into <br> our Fantasy Stock Game.</p>
         </div>
     </div>
-</section>
 
-<bottom-footer>
-    <p>&copy; <?= date("Y"); ?> Fantasy Stock Game Team. All rights reserved.</p>
-</bottom-footer>
+    <bottom-footer>
+        <p>&copy; <?= date("Y"); ?> Fantasy Stock Game Team. All rights reserved.</p>
+    </bottom-footer>
 
+    </section>
+
+    <div class="bottom-bar"></div>
 </body>
 </html>
