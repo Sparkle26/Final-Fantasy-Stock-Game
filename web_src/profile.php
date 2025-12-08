@@ -89,6 +89,23 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['join_league'])) {
     exit();
 }
 
+function setProfileImage($users_id) {
+    $imageExtension = ['jpg', 'jpeg', 'png', 'gif', 'webp'];
+    $baseImagePath = '/web_src/Images/userImages/';
+    $imageUrl = $baseImagePath . 'missingUser.png';
+    foreach ($imageExtension as $ext){
+        $url = $baseImagePath . 'user_' . $users_id . '.' . $ext;
+        echo "Checking URL: $url<br>";
+        
+        if(file_exists($url)) {
+            $imageUrl = $url;
+            break;
+        }
+    }
+    return $imageUrl;
+}
+$profileImage = setProfileImage($users_id);
+echo "Profile Image:  $profileImage";
 
 
 ?>
@@ -123,7 +140,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['join_league'])) {
 <h2 class="welcome-title">Welcome, <?php echo htmlspecialchars($user['username']); ?>!</h2>
 
 <div class="profile-section">
-    <div class="profile-img aya-image"></div>
+    <div class="profile-img" style="background-image: url('<?php echo $profileImage ?>')"></div>
     
     <div class="stats-wrapper">
         <div class="stats-group">
