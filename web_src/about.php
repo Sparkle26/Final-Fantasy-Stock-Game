@@ -113,6 +113,6 @@ require_once "../data_src/api/includes/db_connect.php";
 
     </section>
 
-    <div class="bottom-bar"></div>
+    <div class="bottom-barr"></div>
 </body>
 </html>

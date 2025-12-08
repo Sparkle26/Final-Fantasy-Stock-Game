@@ -1,50 +1,48 @@
 @import url('https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@300;400;500;600;700;800&display=swap');
 
-* {
-    margin: 0;
-    padding: 0;
-    box-sizing: border-box;
-}
-
-/* Body text */
 body {
-    min-height: 100vh;
-    background-color: #FEFEFE;
-    display: flex;
-    flex-direction: column;
-    font-family: 'Kanit', sans-serif;
-    color: #333;
+  background-color: #FEFEFE;
+  color: #000;
+  font-family: 'Plus Jakarta Sans', sans-serif;
+  margin: 0;
+  padding: 0;
 }
 
-/* Header */
-header {
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    height: 70px;
-    padding: 0 24px;
-    border-bottom: 1px solid rgba(0,0,0,.1);
-    background: #fff;
-    position: relative;
-    z-index: 10;
+.site-header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  height: 100px;
+  padding: 0 16px;
+  background-color: #fff;
+  border-bottom: 1px solid #e6e6e6;
 }
 
-/* Navigation */
+.site-title {
+  font-size: 28px;
+  margin-left: 50px;
+  font-family: 'Plus Jakarta Sans', sans-serif;
+  font-weight: 1000;
+}
+
 .site-nav ul {
-    list-style: none;
-    display: flex;
-    gap: 8px;
+  list-style: none;
+  display: flex;
+  gap: 8px;
+  margin: 0;
+  padding: 0;
 }
 
 .site-nav ul li a {
-    padding: 14px 16px;
-    text-decoration: none;
-    color: #000;
-    font-weight: 500;
+  color: #000;
+  padding: 14px 16px;
+  text-decoration: none;
+  font-family: 'Plus Jakarta Sans', sans-serif;
+  font-weight: 500;
 }
 
 .site-nav ul li a:hover {
-    color: #3DB5E6;
+  color: #3DB5E6;
 }
 
 /* Fixed bottom bar */
@@ -65,10 +63,8 @@ h1 {
     font-family: 'Plus Jakarta Sans', sans-serif;
     font-weight: 800;
     font-size: 26px;
-    line-height: 1.2;
     color: #2b2b2b;
     text-align: center;
-    margin-bottom: 30px;
 }
 
 /* Section title (e.g., League Standings, Bracket) */

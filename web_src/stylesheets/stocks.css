@@ -151,7 +151,7 @@
     }
 }
 
-.bottom-bar {
+/* .bottom-bar {
   position: relative;
   bottom: 0;
   left: 0;
@@ -160,3 +160,4 @@
   background-color: #587200;
   z-index: 10;
 }
+  

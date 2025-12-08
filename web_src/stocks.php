@@ -153,6 +153,6 @@ session_start();
 })();
 </script>
 
-<div class="bottom-bar"></div>
+
 </body>
 </html>

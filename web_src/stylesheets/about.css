@@ -138,7 +138,6 @@ h3 {
     text-align: center;
     margin-top: 70px;
     color: #1E1E1E;
-    margin-bottom: 100px;
 }
 
 .team-container {
@@ -192,8 +191,8 @@ h3 {
 }
 
 /* Bottom bar */
-.bottom-bar {
-  position: relative;
+.bottom-barr {
+  position: unset;
   bottom: 0;
   left: 0;
   width: 100%;
