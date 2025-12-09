@@ -195,7 +195,7 @@ if ($opponentID) {
     </nav>
 </header>
 
-<h1>Round <?php echo $currentRound; ?> Matchup</h1>
+<h1 class="page-title">Round <?php echo $currentRound; ?> Matchup</h1>
 
 <div class="matchup-wrapper">
     <!-- LEFT: Logged-in user -->
