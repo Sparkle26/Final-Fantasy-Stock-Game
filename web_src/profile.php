@@ -31,6 +31,28 @@ while ($row = $stocksResult->fetch_assoc()) {
     $userStocks[] = $row['ticker'];
 }
 
+/* >>> ADD BUILD CHART DATA HERE <<< */
+$chartData = [];
+foreach ($userStocks as $ticker) {
+    $stmt = $connection->prepare("SELECT start_price FROM Holdings WHERE ticker = ?");
+    $stmt->bind_param("s", $ticker);
+    $stmt->execute();
+    $res = $stmt->get_result();
+    if ($row = $res->fetch_assoc()) {
+        $base = (float)$row['start_price'];
+        $prices = [];
+        for ($i=0; $i<3; $i++) {   // now 3 days
+            $base += rand(-5,5);   // fake random walk
+            $prices[] = $base;
+        }
+        $chartData[] = [
+            'ticker' => $ticker,
+            'dates' => ["Day 1","Day 2","Day 3"], // 3 days
+            'prices' => $prices
+        ];
+    }
+}
+
 /* Handle Save My Stock List submission */
 if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['stocks'])) {
     $del = $connection->prepare("DELETE FROM users_stocks WHERE usersID = ?");
@@ -216,8 +238,63 @@ $profileImage = setProfileImage($users_id);
         <button type="submit" class="save-stocks-btn">Save My Stock List</button>
     </form>
 </div>
+<!-- Chart section -->
+<div class="profile-section">
+    <!-- Left side: profile + stats -->
+    <div class="profile-left">
+        <!-- profile image + upload -->
+        <!-- stats + stocks container -->
+    </div>
 
-<a class="logout-btn" href="/web_src/classes/Login/Logout.php">Logout</a>
+    <!-- Right side: Chart -->
+    <div class="profile-chart">
+        <canvas id="userStocksChart"></canvas>
+    </div>
+</div>
+
+<script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+<script>
+const chartData = <?php echo json_encode($chartData); ?>;
+
+const ctx = document.getElementById('userStocksChart').getContext('2d');
+
+new Chart(ctx, {
+    type: 'line',
+    data: {
+        labels: chartData.length ? chartData[0].dates : [],
+        datasets: chartData.map(stock => ({
+            label: stock.ticker,
+            data: stock.prices,
+            borderColor: '#' + Math.floor(Math.random()*16777215).toString(16),
+            backgroundColor: '#' + Math.floor(Math.random()*16777215).toString(16),
+            fill: false
+        }))
+    },
+    options: {
+        responsive: true,
+        plugins: {
+            title: { display: true, text: '3‑Day Price Changes (Selected Stocks)' },
+            legend: {
+                labels: {
+                    usePointStyle: true,
+                    pointStyle: 'rectRounded',
+                    boxWidth: 20,
+                    boxHeight: 20
+                }
+            }
+        },
+        scales: {
+            x: { title: { display: true, text: 'Day' } },
+            y: { title: { display: true, text: 'Price ($)' } }
+        }
+    }
+});
+
+</script>
+
+<div class="logout-container">
+  <a class="logout-btn" href="/web_src/classes/Login/Logout.php">Logout</a>
+</div>
 </body>
 </html>
-``
+`
