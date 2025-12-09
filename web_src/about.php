@@ -49,15 +49,15 @@ require_once "../data_src/api/includes/db_connect.php";
         <div class="card-wrapper">
 
             <div class="card"
-                style="--image: url('/web_src/Images/IMG_4458.jpeg'); 
+                style="--image: url('/web_src/Images/IMG_4558.jpeg'); 
                        --angle: -15deg; --x: 190px; --y: 90px;
-                       --caption: 'Brainstorming how the matchups will work in the SQL database.';">
+                       --caption: 'Finishing Touches';">
             </div>
 
             <div class="card"
                 style="--image: url('/web_src/Images/01aa16e441c66aafc86798964bf6649a.jpg'); 
                        --angle: 12deg; --x: -90px; --y: -40px;
-                       --caption: 'Computer screens';">
+                       --caption: 'B)';">
             </div>
 
             <div class="card"
@@ -67,9 +67,9 @@ require_once "../data_src/api/includes/db_connect.php";
             </div>
 
             <div class="card"
-                style="--image: url('/web_src/Images/Barbie dreamhouse✭.jpg'); 
+                style="--image: url('/web_src/Images/IMG_4458.jpeg'); 
                        --angle: 18deg; --x: 100px; --y: -50px;
-                       --caption: 'Presentation moment';">
+                       --caption: 'Brainstorming how the matchups will work in the SQL database.';">
             </div>
 
         </div>
