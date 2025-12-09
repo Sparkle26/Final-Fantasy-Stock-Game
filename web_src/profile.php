@@ -54,6 +54,18 @@ $inLeagueRes = $stmt->get_result();
 $inLeagueRow = $inLeagueRes->fetch_assoc();
 $userLeague = $inLeagueRow['leagueID'];
 
+/* If in a league, fetch its name */
+$currentLeagueName = null;
+if ($userLeague !== null) {
+    $stmt = $connection->prepare("SELECT leagueName FROM League WHERE leagueID = ?");
+    $stmt->bind_param("i", $userLeague);
+    $stmt->execute();
+    $leagueRes = $stmt->get_result();
+    if ($leagueRow = $leagueRes->fetch_assoc()) {
+        $currentLeagueName = $leagueRow['leagueName'];
+    }
+}
+
 /* Fetch all leagues if user is NOT in one */
 $availableLeagues = [];
 if ($userLeague === null) {
@@ -152,26 +164,29 @@ $profileImage = setProfileImage($users_id);
     </div>
 </div>
 
-<!-- League browser ABOVE stocks list -->
-<?php if ($userLeague === null): ?>
+<!-- League section ABOVE stocks list -->
 <div class="league-browser">
-    <h2 class="league-browser-title">Join a League</h2>
-    <?php if (empty($availableLeagues)): ?>
-        <p>No active leagues available right now.</p>
+    <?php if ($userLeague === null): ?>
+        <h2 class="league-browser-title">Join a League</h2>
+        <?php if (empty($availableLeagues)): ?>
+            <p>No active leagues available right now.</p>
+        <?php else: ?>
+            <ul class="league-list">
+                <?php foreach ($availableLeagues as $lg): ?>
+                <li class="league-item">
+                    <span class="league-name"><?php echo htmlspecialchars($lg['leagueName']); ?></span>
+                    <form method="POST" class="league-form">
+                        <button type="submit" name="join_league" value="<?php echo $lg['leagueID']; ?>" class="join-btn">Join</button>
+                    </form>
+                </li>
+                <?php endforeach; ?>
+            </ul>
+        <?php endif; ?>
     <?php else: ?>
-        <ul class="league-list">
-            <?php foreach ($availableLeagues as $lg): ?>
-            <li class="league-item">
-                <span class="league-name"><?php echo htmlspecialchars($lg['leagueName']); ?></span>
-                <form method="POST" class="league-form">
-                    <button type="submit" name="join_league" value="<?php echo $lg['leagueID']; ?>" class="join-btn">Join</button>
-                </form>
-            </li>
-            <?php endforeach; ?>
-        </ul>
+        <h2 class="league-browser-title">Your League</h2>
+        <p>You are currently in: <strong><?php echo htmlspecialchars($currentLeagueName); ?></strong></p>
     <?php endif; ?>
 </div>
-<?php endif; ?>
 
 <!-- Stocks list comes AFTER league browser -->
 <div class="stocks-container">
@@ -205,3 +220,4 @@ $profileImage = setProfileImage($users_id);
 <a class="logout-btn" href="/web_src/classes/Login/Logout.php">Logout</a>
 </body>
 </html>
+``

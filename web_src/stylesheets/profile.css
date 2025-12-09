@@ -143,20 +143,19 @@ body {
   margin-top: 6px;
 }
 
-/* League browser as horizontal panel */
+/* League browser panel ABOVE stocks list */
 .league-browser {
-  margin: 30px 65px;
+  margin: 20px 65px 0 65px; /* same left margin as stocks-container */
   background: #fff;
   padding: 20px;
   border-radius: 12px;
   box-shadow: 0 0 12px rgba(0,0,0,0.2);
-  width: calc(50% - 130px);
+  width: calc(47% - 130px);
   max-width: 1000px;
 }
 
 .league-browser-title {
   margin-bottom: 15px;
-  margin-top: -1px;
   font-size: 1.3rem;
   font-weight: bold;
 }
@@ -239,11 +238,11 @@ body {
 }
 
 .stocks-container {
-  width: calc(100% - 760px);
+  width: calc(50% - 130px);
   min-width: 300px;
   margin-top: 20px;
   margin-left: 65px;
-  margin-right: 20px;
+  margin-right: 65px;
   display: flex;
   flex-direction: column;
   gap: 10px;
