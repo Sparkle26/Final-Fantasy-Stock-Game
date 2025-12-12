@@ -14,3 +14,14 @@ https://trello.com/invite/b/68f0e35aed34378f3a3f368d/ATTI07652d7f897fbb1ca4644ff
 
 Through Trello, we are tracking our progress of various task and requirements.
 
+# Getting Started
+
+Access the website:
+https://fantasy.etowndb.com/web_src/index.html
+
+**Click Register**
+
+Provide a username and password.
+
+**You're all set!
+Get ready to explore the world of finance and stocks!**
